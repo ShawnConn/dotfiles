@@ -1,0 +1,145 @@
+#!/usr/bin/env bash
+##
+## misc: Various functions
+##
+
+#Countdown function
+function countdown() {
+  local NOW
+  NOW=$(date +%s)
+  local END
+  END=$((NOW + $1))
+  TITLE=${2:-🕒 Countdown}
+  MESSAGE=${3:-The countdown of $1 seconds is finished.}
+  while (( NOW < END )); do
+    case "$OSTYPE" in
+      "darwin"* )
+        printf "%s\r" "$(date -u -j -f %s $((END - NOW)) +%T)"
+        ;;
+      "linux-gnu" )
+        printf "%s\r" "$(date -u -d @$((END - NOW)) +%T)"
+        ;;
+      * )
+        ;;
+    esac
+    sleep 0.25
+    NOW=$(date +%s)
+  done
+  terminal-notifier -title "$TITLE" -subtitle "" -message "$MESSAGE" -activate com.googlecode.iterm2
+  say "$MESSAGE"
+}
+
+# Color map for shell
+function color-map() {
+  for i in {0..255}; do print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}; done
+}
+
+# GitDiff function to use vim.
+function git-diff() {
+  git diff --no-ext-diff -w "$@" | vim -R -
+}
+
+# Tarball all git changes
+function git-tarball-changes() {
+  GIT_DIR=$(git rev-parse --show-toplevel)
+  TAR="$GIT_DIR/../$(basename "$GIT_DIR")-changed.tar.gz"
+  tar -czvf "$TAR" $(git diff --cached --name-only && git ls-files -m)
+  echo "$TAR created"
+}
+
+
+# Symbolically link all subdirs within a specified dir in the cwd
+function ln-dir-mirror() {
+  if [[ -d "$1" ]]; then
+    find "$1" -type d -maxdepth 1 -mindepth 1 -exec sh -c 'if [ ! -d $(basename "{}") ]; then ln -s "{}" $(basename "{}"); fi' \;
+  fi
+}
+
+#Output the timestamp of the last commmand
+function last-command-start() {
+  COLUMNS=$(tput cols)
+  COLUMNS="$(($COLUMNS-1))"
+  RED=$(tput setaf 1)
+  GREEN=$(tput setaf 2)
+  YELLOW=$(tput setaf 3)
+  NORMAL=$(tput sgr0)
+  TIMESTAMP=$(fc -l -t '%F %T' | tail -n1 | cut -f3-5 -d' ')
+  TIMESTAMP=$(echo $TIMESTAMP | xargs echo -n)
+  printf '%s%*s%s' "$YELLOW" $COLUMNS "[${TIMESTAMP:2}]" " $NORMAL"
+}
+#Colorize Manual
+function man() {
+    env \
+    LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+    LESS_TERMCAP_md=$(printf "\e[1;31m") \
+    LESS_TERMCAP_me=$(printf "\e[0m") \
+    LESS_TERMCAP_se=$(printf "\e[0m") \
+    LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+    LESS_TERMCAP_ue=$(printf "\e[0m") \
+    LESS_TERMCAP_us=$(printf "\e[1;32m") \
+    man "$@"
+}
+
+#Search OUT for MAC address
+oui() {
+  # Normalize for OUI then search
+  MAC="$1"
+  MAC=$(echo "$MAC" | awk '{print toupper($0)}')
+  MAC="${MAC//:/-}"
+  MAC="${MAC:0:8}"
+
+  grep -i "$MAC" <(cat '/tmp/out.txt' 2> /dev/null || curl -s 'http://standards-oui.ieee.org/oui.txt' | tee '/tmp/out.txt')
+}
+
+#print out a line w/ title
+function printline() {
+  if [ "$1" ]; then
+    echo ""
+    printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' =
+    echo "$1"
+    printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' =
+    echo ""
+  else
+    printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' =
+  fi
+}
+
+
+#Print CSV
+function print-csv {
+  column -t -s, "$@" | less -F -S -X -K
+}
+
+#Gen PW
+pw-gen() {
+  echo $(grep "^[^']\{3,5\}$" /usr/share/dict/words|shuf -n4 |  tr '[:upper:]' '[:lower:]' | tr '\n' '-' | sed 's/.$//')
+}
+
+#Print TSV
+function print-tsv {
+  column -t -s $'\t' "$@" | less -F -S -X -K
+}
+
+#SSH without public key
+function ssh-nokey() {
+  ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no "$@"
+}
+
+#Retrieve SSH RSA fingerprint
+function ssh-fingerprint-rsa() {
+  ssh-keyscan -t rsa "$@" 2>/dev/null | cut -f3 -d' '
+}
+
+#Create dir / file in one cms
+function touchd() {
+  mkdir -p "$(dirname "$1")" && touch "$1"
+}
+
+#Shortcut to open URL
+function wopen() {
+  if [[ $1 == "http://"* || $1 == "https://"* ]]; then
+    open "$1"
+  else
+    open "http://$1"
+  fi
+}

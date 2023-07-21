@@ -1,0 +1,5 @@
+"\e[1;6D": backward-word  # use CTRL-SHIFT-LEFT_ARROW to jump back a word at a time 
+"\e[1;6C": forward-word   # use CTRL-SHIFT-RIGHT_ARROW to jump foward a word at a time
+"\C-b": backward-word     # use CTRL-B to jump back a word at a time
+"\C-f": forward-word      # use CTRL-F to jump forward a word at a time
+#set editing-mode vi       # hit escape and use vi commands to edit the text of the command line

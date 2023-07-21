@@ -1,0 +1,112 @@
+##
+## macos: macOS-env specific functions.
+##
+
+#Empty the OSX icon cache
+function macos-empty-icon-cache {
+  sudo rm -rfv /Library/Caches/com.apple.iconservices.store &> /dev/null
+  sudo find /private/var/folders/ \( -name com.apple.dock.iconcache -or -name com.apple.iconservices \) -exec rm -rfv {} \; &> /dev/null
+  sleep 3
+  sudo touch /Applications/* &> /dev/null
+
+  for app in "Dock" \
+    "Finder"; do
+    killall "${app}" &> /dev/null
+  done
+
+  echo "macOS icon cache emptied."
+}
+
+#Open a specfied OSX PrefPane
+function macos-pref {
+  if [[ -n "$1" ]]; then
+    if [[ -d "/System/Library/PreferencePanes/$1.prefPane" ]]; then
+      open "/System/Library/PreferencePanes/$1.prefPane"
+    fi
+  fi
+}
+
+#Connect to a Tunnelblick configured VPN
+function macos-ovpn-connect {
+  if [[ -z "$1" ]]; then
+    return 1
+  fi
+  /usr/bin/env osascript <<-EOF
+tell application "Tunnelblick"
+  connect "$1"
+end tell
+EOF
+}
+
+#Disconnect to a Tunnelblick configured VPN
+function macos-ovpn-disconnect {
+  if [[ -z "$1" ]]; then
+    return 1
+  fi
+  /usr/bin/env osascript <<-EOF
+tell application "Tunnelblick"
+  disconnect "$1"
+end tell
+EOF
+}
+
+#Connect to a MacOSX configured VPN
+#Config is stored in /Library/Preferences/SystemConfiguration/preferences.plist
+function macos-vpn-connect {
+  if [[ -z "$1" ]]; then
+    return 1
+  fi
+  /usr/bin/env osascript <<-EOF
+tell application "System Events"
+  tell current location of network preferences
+    set VPN to service "$1"
+    if exists VPN then connect VPN
+    repeat while (current configuration of VPN is not connected)
+      delay 1
+    end repeat
+  end tell
+end tell
+EOF
+}
+
+#Disconnect from a MacOSX configured VPN
+#Config is stored in /Library/Preferences/SystemConfiguration/preferences.plist
+function macos-vpn-disconnect {
+  if [[ -z "$1" ]]; then
+    return 1
+  fi
+  /usr/bin/env osascript <<-EOF
+tell application "System Events"
+  tell current location of network preferences
+    set VPN to service "$1"
+    if exists VPN then disconnect VPN
+  end tell
+end tell
+return
+EOF
+}
+
+#Set the DNS for all net services
+function macos-switch-dns() {
+  # Select DNS option
+  if [[ "$1" == "CF" ]]; then
+    DNS=("1.1.1.1" "1.0.0.1")
+  elif [[ "$1" == "GOOG" ]]; then
+    DNS=("8.8.8.8" "8.8.4.4")
+  elif [[ "$1" == "OPEN" ]]; then
+    DNS=("208.67.222.222" "208.67.220.220")
+  else
+    DNS=("empty")
+  fi
+
+  # Assume only one Net location
+  #NET=$(networksetup -listlocations | head -n1)
+  SERVICES=$(networksetup -listallnetworkservices | tail -n +2)
+  #ROUTER_IP=$(networksetup -getinfo "$SERVICE" | grep '^Router: ' | cut -f2 -d' ' | xargs)
+
+  echo "$SERVICES" | while read -r SERVICE ; do
+    networksetup -setdnsservers "$SERVICE" "${DNS[@]}"
+  done
+
+  echo "The DNS has been set to" "${DNS[@]}"
+}

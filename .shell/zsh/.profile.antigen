@@ -1,0 +1,88 @@
+#!/usr/bin/env zsh
+
+#######   ANTIGEN   ############################################################
+HB=$(brew config | grep HOMEBREW_PREFIX | cut -d':' -f2 | xargs)
+source $HB/share/antigen/antigen.zsh
+
+# OMZ
+antigen use oh-my-zsh
+
+if [[ ! -d "$HOME/.antigen/bundles/robbyrussell/oh-my-zsh/cache/completions" ]]; then
+  mkdir -p "$HOME/.antigen/bundles/robbyrussell/oh-my-zsh/cache/completions"
+fi
+
+# PLUGINS
+# Bundles from oh-my-zsh
+antigen bundle aws
+antigen bundle battery
+antigen bundle composer
+antigen bundle command-not-found
+antigen bundle docker
+antigen bundle docker-compose
+antigen bundle heroku
+antigen bundle httpie
+antigen bundle gcloud
+antigen bundle git
+antigen bundle gitfast
+antigen bundle git-extras
+antigen bundle git_remote_branch
+antigen bundle grunt
+antigen bundle history
+antigen bundle jira
+antigen bundle jsontools
+antigen bundle node
+antigen bundle npm
+antigen bundle nvm
+antigen bundle osx
+antigen bundle pip
+antigen bundle redis-cli
+antigen bundle rsync
+antigen bundle safe-paste
+antigen bundle sudo
+antigen bundle symfony2
+antigen bundle terraform
+antigen bundle urltools
+antigen bundle vagrant
+antigen bundle vi-mode
+antigen bundle vundl
+antigen bundle wd
+antigen bundle web-search
+antigen bundle yum
+antigen bundle z
+
+# Other ZSH plugins
+antigen bundle djui/alias-tips
+antigen bundle Valiev/almostontop
+antigen bundle changyuheng/fz
+antigen bundle cal2195/q
+antigen bundle gerges/oh-my-zsh-jira-plus
+antigen bundle hchbaw/opp.zsh
+antigen bundle hchbaw/zce.zsh
+antigen bundle joshskidmore/zsh-fzf-history-search
+if [[ -x "$(command -v terraform)" ]]; then
+  antigen bundle macunha1/zsh-terraform
+fi
+antigen bundle MichaelAquilina/zsh-auto-notify
+antigen bundle MichaelAquilina/zsh-history-filter
+antigen bundle supercrabtree/k
+antigen bundle unixorn/docker-helpers.zshplugin@main
+antigen bundle unixorn/git-extra-commands@main
+antigen bundle zsh-users/zsh-autosuggestions@v0.5.0
+antigen bundle zsh-vi-more/vi-motions
+antigen bundle zdharma-continuum/fast-syntax-highlighting
+antigen bundle b4b4r07/zsh-vimode-visual
+
+# THEMES
+antigen theme crunch
+if [[ -f "$HOME/.zshrc.theme" ]]; then
+  THEME=$(cat "$HOME/.zshrc.theme")
+  antigen theme "$THEME"
+else
+  POWERLEVEL10K_INSTALLATION_PATH=$ANTIGEN_BUNDLES/romkatv/powerlevel10k
+  antigen theme romkatv/powerlevel10k
+fi
+
+# APPLY CONFIG
+antigen apply
+#######   ANTIGEN   ############################################################
+

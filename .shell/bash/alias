@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+##########ALIASES###############################################################
+alias env-setup="$HOME/env-setup/scripts/env-setup"
+
+##########NAV ##################################################################
+alias ..1='cd ..'
+alias ..2='cd ../..'
+alias ..3='cd ../../..'
+alias ..4='cd ../../../..'
+alias ..5='cd ../../../../..'
+alias ..6='cd ../../../../../..'
+alias ..7='cd ../../../../../../..'
+alias ..8='cd ../../../../../../../..'
+alias ..9='cd ../../../../../../../../..'
+
+#Shortcut detailed listing
+alias lsl='ls -al'
+
+#Previous dir
+alias pd='cd -'
+
+#Use Tree w/ hidden & Git dirs excluded
+alias tree='tree -a -I .git'
+
+#Colorize watch
+alias watch='watch -c '
+
+########## NET #################################################################
+
+#Get external IP
+alias wanip="dig -4 TXT +short o-o.myaddr.l.google.com @ns1.google.com | tr -d '\"'"
+alias wanipv6="dig -6 TXT +short o-o.myaddr.l.google.com @ns1.google.com | tr -d '\"'"
+
+#WGet to StdOut
+alias wgetout='wget -qO- '
+
+########## DIFF ################################################################
+command -v colordiff >/dev/null 2>&1 && { alias diff="colordiff"; }
+
+##Silver search w/ hidden & Git dirs excluded
+alias ag='ag --hidden --ignore-dir .git'
+
+#Colorize grep
+alias grep='grep --color=always'
+
+########## GIT #################################################################
+alias g='git'
+
+#Retrieve git remote
+alias git-remote-current="git branch -vv | grep '\* ' | sed 's/.*\[\(.*\)\].*/\1/g; s/.*(HEAD detached at \(.*\)).*/\1/g; s/\* \(.*\)                           .*/\1/g; s/\*\ \([^ ]*\)\ .*/\1/g'"
+
+#Git push all branches
+alias git-push-branches='git push -u $(git config --get branch.master.remote) --all'
+
+########## VIM #################################################################
+#No RC Vim
+alias nrcvim='vim -u NONE'
+
+#Run vim w/ vundle config and plugin clean & quit flags
+alias vundle-clean='vim -u "$HOME/.vundle.vimrc" +PluginClean! +qall'
+
+#Run vim w/ vundle config and plugin install & quit flags
+alias vundle-install='vim -u "$HOME/.vundle.vimrc" +PluginInstall +qall'
+
+#Run vim w/ vundle config and plugin update & quit flags
+alias vundle-update='vim -u "$HOME/.vundle.vimrc" +PluginUpdate +qall'

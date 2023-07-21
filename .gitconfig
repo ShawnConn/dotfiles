@@ -1,0 +1,40 @@
+[alias]
+  # Shorten commit commands
+  c = commit
+  ca = commit -a
+  cm = commit -m
+  cam = commit -am
+  # Show files altered in a commit
+  commit-files = diff-tree --no-commit-id --name-only -r -D
+  # Git diff
+  d = diff
+  # Git diff via vim
+  dt = difftool
+  # Pagerless Git diff for patching
+  dp = !git --no-pager diff
+  # Ignore local repo file
+	ign = update-index --skip-worktree
+  # Unignore local repo file
+	unign = update-index --no-skip-worktree
+  # Show ignored repo files
+	ignd = !git ls-files -v | grep \"^S\"
+  # Graph branches
+  l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+  # Show file history
+  lf = log -p --follow
+  # Checkout previous branch
+  pb = checkout -
+  # Remove branches not on remote
+  prune-remote = fetch --prune
+  # Remove branches not on local
+  prune-local = remote prune 
+  # Quick status view
+  s = status
+  # Ask what files to stage
+  stage-ask = add -p
+  # Stash even unadded files
+  stash-all = stash save --include-untracked
+  # Apply saved stash name
+  stash-apply = "!f() { git stash apply \"$(git stash list | grep -E \"$*\" | awk \"{ print $ 1; }\" | sed -n \"s/://;1p\")\"; }; f"
+  # Undo commit
+  undo = reset --soft HEAD^
