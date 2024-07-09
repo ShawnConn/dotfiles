@@ -53,9 +53,50 @@ alias git-remote-current="git branch -vv | grep '\* ' | sed 's/.*\[\(.*\)\].*/\1
 #Git push all branches
 alias git-push-branches='git push -u $(git config --get branch.master.remote) --all'
 
-########## VIM #################################################################
+#Shortcut detailed listing
+alias lsl='ls -al'
+
 #No RC Vim
 alias nrcvim='vim -u NONE'
+
+#Toggle Show/Hide hidden files in Finder
+alias macos-file-hide='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
+alias macos-file-show='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
+
+#Network setup
+alias macos-net-change='networksetup -switchtolocation'
+
+#Previous dir
+alias pd='cd -'
+
+#OS-dependant aliases
+case "$OSTYPE" in
+  "darwin"* )
+    #SVIM = root edit w/ .vimrc config
+    alias svim='sudo vim'
+    alias shuf='gshuf'
+    ;;
+  "linux-gnu" )
+    #SVIM = root edit w/ .vimrc config
+    alias svim='sudoedit'
+    ;;
+  * )
+    ;;
+esac
+
+#Repeat last command as root
+alias resu='sudo $(fc -ln -1)'
+
+#Use Tree w/ hidden & Git dirs excluded
+alias tree='tree -a -I .git'
+
+########## VIM #################################################################
+#Use MacVim In Terminal
+if [ -f /Applications/MacVim.app/Contents/MacOS/Vim ]; then
+  alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
+  alias mvim='/Applications/MacVim.app/Contents/MacOS/Vim'
+fi
+########## VIM #################################################################
 
 #Run vim w/ vundle config and plugin clean & quit flags
 alias vundle-clean='vim -u "$HOME/.vundle.vimrc" +PluginClean! +qall'
@@ -65,3 +106,17 @@ alias vundle-install='vim -u "$HOME/.vundle.vimrc" +PluginInstall +qall'
 
 #Run vim w/ vundle config and plugin update & quit flags
 alias vundle-update='vim -u "$HOME/.vundle.vimrc" +PluginUpdate +qall'
+
+#Run a build of YCM after a vundle install
+alias vundle-ycm='cd ~/.vim/bundle/YouCompleteMe && ./install.py --all && cd -'
+
+#Get external IP
+alias wanip="dig -4 TXT +short o-o.myaddr.l.google.com @ns1.google.com | tr -d '\"'"
+alias wanipv6="dig -6 TXT +short o-o.myaddr.l.google.com @ns1.google.com | tr -d '\"'"
+
+#Colorize watch
+alias watch='watch -c '
+
+#WGet to StdOut
+alias wgetout='wget -qO- '
+##########ALIASES###############################################################

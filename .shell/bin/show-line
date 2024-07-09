@@ -1,0 +1,17 @@
+#!/bin/sh
+#Show a specific line of a file
+
+#Display usage
+usage() {
+  echo "usage: show-line <FILE> [<LINE_NUMBER>]"
+  echo "         <FILE>:  The file to show lines"
+  echo "  <LINE_NUMBER>:  The line of a file to output"
+}
+
+if [ -f "$1" ] ; then
+  NUM="$2"
+  nl -ba  -nrz < "$1" | grep --color=never "^0*$NUM\s*.*"
+else
+  usage
+fi
+

@@ -1,16 +1,6 @@
-#!/usr/bin/env bash
 ##
 ## macos: macOS-env specific functions.
 ##
-
-#Show all defaults
-function macos-show-defaults {
-  for i in $(defaults domains | tr ',' '\n'); do
-    echo "********* READING DEFAULT DOMAIN $i **********";
-    echo;
-    defaults read "$i";
-  done
-}
 
 #Empty the OSX icon cache
 function macos-empty-icon-cache {
@@ -27,11 +17,6 @@ function macos-empty-icon-cache {
   echo "macOS icon cache emptied."
 }
 
-#List all bundle ids
-function macos-list-bundle-ids {
-  lsappinfo | grep 'bundleID="' | cut -d'"' -f2 | sort
-}
-
 #Open a specfied OSX PrefPane
 function macos-pref {
   if [[ -n "$1" ]]; then
@@ -39,12 +24,6 @@ function macos-pref {
       open "/System/Library/PreferencePanes/$1.prefPane"
     fi
   fi
-}
-
-#Connect to a Tunnelblick configured VPN
-function macos-mic-vol {
-  VOL_PERCENT=${1:-0}
-  osascript -e "tell application \"System Events\" to set volume input volume $VOL_PERCENT"
 }
 
 #Connect to a Tunnelblick configured VPN
@@ -130,10 +109,4 @@ function macos-switch-dns() {
   done
 
   echo "The DNS has been set to" "${DNS[@]}"
-}
-
-#Attempt WiFi Relogin
-function macos-wifi-relogin {
-  echo "GATEWAY: http://$(netstat -rn | grep default | awk '{print $2}')/"
-  open "http://www.gstatic.com/generate_204"
 }

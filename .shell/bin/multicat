@@ -1,12 +1,11 @@
-#!/bin/bash
-# Execute a command in each subdir
+#!/bin/sh
 
 # Set stop on error / enable debug
 set -euo pipefail
 #set -vx
 
 ############################################################################
-# EXECUTE A COMMAND IN EACH SUBDIR
+# Multicat Files
 ############################################################################
 
 ##{{{#######################################################################
@@ -43,21 +42,11 @@ quit() {
   echo "$MESSAGE" 1>&2; exit "$ERROR_CODE";
 }
 
-############################################################################
-# VARS
-############################################################################
-# Output colors.
-C_HIL="\033[36m"
-C_WAR="\033[33m"
-C_SUC="\033[32m"
-C_ERR="\033[31m"
-C_RES="\033[0m"
-
 ##}}}#######################################################################
 
-#/ Usage: dexec [<CMD>]
+#/ Usage: multicat [<WILDCARD>]
 #/
-#/   <CMD>: The command to execute in each subdir
+#/   <WILDCARD>: A wildcard path to cat.
 #/ Examples:
 #/ Options:
 #/   --help: Display this help message
@@ -78,8 +67,14 @@ while getopts 'h' FLAG; do
   esac
 done
 
-find -L ./* -prune -type d | while read DIR; do
-  echo -e "${C_HIL}$DIR:${C_RES}"
-  ( cd "$DIR" && eval "$@" )
-  echo ""
-done
+# @TODO: Add code
+if [ -z "$1" ]; then
+  usage
+else
+  FILES="$@"
+  for FILE in $FILES
+  do
+    printline "$FILE"
+    cat "$FILE"
+  done
+fi

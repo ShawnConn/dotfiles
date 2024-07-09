@@ -2,6 +2,15 @@
 ## macos: macOS-env specific functions.
 ##
 
+#Show all defaults
+function macos-show-defaults {
+  for i in $(defaults domains | tr ',' '\n'); do
+    echo "********* READING DEFAULT DOMAIN $i **********";
+    echo;
+    defaults read "$i";
+  done
+}
+
 #Empty the OSX icon cache
 function macos-empty-icon-cache {
   sudo rm -rfv /Library/Caches/com.apple.iconservices.store &> /dev/null
@@ -15,6 +24,11 @@ function macos-empty-icon-cache {
   done
 
   echo "macOS icon cache emptied."
+}
+
+#List all bundle ids
+function macos-list-bundle-ids {
+  lsappinfo | grep 'bundleID="' | cut -d'"' -f2 | sort
 }
 
 #Open a specfied OSX PrefPane
