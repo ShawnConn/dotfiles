@@ -158,3 +158,30 @@ function zsh-theme() {
   fi
   touch "$HOME/.zshrc"
 }
+
+########## OMZ/NVM #################################################################
+export NVM_DIR="$HOME/.nvm"
+
+# Bootstrap nvm if it hasn't been setup yet.
+function nvm() {
+  # Ensure NVM dir exists
+  if [ ! -d "$NVM_DIR" ]; then
+    mkdir "$NVM_DIR"
+  fi
+
+  # Bootstrap NVM and destroy this wrapper
+  if [ -z "$NVM_BOOTED" ]; then
+    export NVM_BOOTED="1"
+    unset -f nvm
+    . "$(brew --prefix nvm)/nvm.sh"
+    nvm "$@"
+  fi
+}
+
+autoload -U add-zsh-hook
+load-nvmrc() {
+  if [[ -f .nvmrc && -r .nvmrc ]]; then
+    nvm use
+  fi
+}
+add-zsh-hook chpwd load-nvmrc

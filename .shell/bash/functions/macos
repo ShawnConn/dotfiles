@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 ##
 ## macos: macOS-env specific functions.
 ##
@@ -24,6 +25,12 @@ function macos-pref {
       open "/System/Library/PreferencePanes/$1.prefPane"
     fi
   fi
+}
+
+#Connect to a Tunnelblick configured VPN
+function macos-mic-vol {
+  VOL_PERCENT=${1:-0}
+  osascript -e "tell application \"System Events\" to set volume input volume $VOL_PERCENT"
 }
 
 #Connect to a Tunnelblick configured VPN
@@ -109,4 +116,10 @@ function macos-switch-dns() {
   done
 
   echo "The DNS has been set to" "${DNS[@]}"
+}
+
+#Attempt WiFi Relogin
+function macos-wifi-relogin {
+  echo "GATEWAY: http://$(netstat -rn | grep default | awk '{print $2}')/"
+  open "http://www.gstatic.com/generate_204"
 }

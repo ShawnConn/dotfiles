@@ -34,6 +34,21 @@ function color-map() {
   for i in {0..255}; do print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}; done
 }
 
+CALENDAR="$1"
+if [[ -z "$CALENDAR" ]]; then
+  CALENDAR="ATTN"
+fi
+
+# Parse through calendar to get next Google Hangout link
+function gcal-next-hangout() {
+  CALENDAR="$1"
+  if [[ -z "$CALENDAR" ]]; then
+    CALENDAR=$(gcalcli list | grep --color=none '@gmail' | sed -e 's/.*owner\([^\s]*\)/\1/g' | xargs)
+  fi
+
+  gcalcli --nocolor agenda $(date -u +"%Y-%m-%dT%H:%M:%SZ") $(date -v'+24H' -u +"%Y-%m-%dT%H:%M:%SZ") --details 'url' --default-calendar "$CALENDAR" | grep --color=none 'Hangout Link' | grep --color=none -o 'http.*' | head -n1
+}
+
 # GitDiff function to use vim.
 function git-diff() {
   git diff --no-ext-diff -w "$@" | vim -R -
@@ -67,6 +82,7 @@ function last-command-start() {
   TIMESTAMP=$(echo $TIMESTAMP | xargs echo -n)
   printf '%s%*s%s' "$YELLOW" $COLUMNS "[${TIMESTAMP:2}]" " $NORMAL"
 }
+
 #Colorize Manual
 function man() {
     env \
@@ -118,6 +134,16 @@ pw-gen() {
 #Print TSV
 function print-tsv {
   column -t -s $'\t' "$@" | less -F -S -X -K
+}
+
+#Edit compressed JSON w/
+function json_pedit() {
+
+  if [ -f "$1" ]; then
+    # @TODO: Figure out how to syntax highlight
+    jq -r < "$1" | vipe -c 'set syntax=json' | jq -c > tmpfile && mv tmpfile "$1"
+    echo "Saved $1"
+  fi
 }
 
 #SSH without public key
