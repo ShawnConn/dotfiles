@@ -606,6 +606,10 @@ defaults write com.apple.controlcenter "NSStatusItem Visible Item-3" 0
 defaults write com.apple.controlcenter "NSStatusItem Visible Item-4" 0
 defaults write com.apple.controlcenter "NSStatusItem Visible WiFi" 0
 
+# Adjust spacing / selection padding of menu bar items
+defaults -currentHost write -globalDomain NSStatusItemSpacing -int 6
+defaults -currentHost write -globalDomain NSStatusItemSelectionPadding -int 12
+
 ################################################################################
 ## Safari & WebKit                                                             #
 ################################################################################
