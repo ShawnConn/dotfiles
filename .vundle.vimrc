@@ -27,6 +27,7 @@ augroup PLUGINS
   Plugin 'elzr/vim-json'
   Plugin 'ernstwi/vim-sticky'
   Plugin 'evidens/vim-twig'
+  Plugin 'girishji/autosuggest.vim'
   Plugin 'girishji/vimcomplete'
   "Plugin 'github/copilot.vim'
   Plugin 'glench/vim-jinja2-syntax'

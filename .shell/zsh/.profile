@@ -197,6 +197,10 @@ else
 	compinit -C;
 fi;
 
+if [[ -x "$(command -v cb)" ]]; then
+  fpath=("$(brew --prefix clipboard)/share/zsh/site-functions/" $fpath)
+fi
+
 ########   SOURCES / VARS  #####################################################
 PATH=$PATH:$HOME/bin:$HOME/.shell/bin
 
