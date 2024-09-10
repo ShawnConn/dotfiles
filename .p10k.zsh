@@ -1820,10 +1820,10 @@
 ##########CUSTOM################################################################
   # Command number (in local history)
   function prompt_history() {
-    p10k segment -b 242 -f 0 -i '☰' -t '%h'
+    p10k segment -b 242 -f 9 -i '☰' -t '%h'
   }
   function instant_prompt_history() {
-    p10k segment -b 242 -f 0 -i '☰' -t ''
+    p10k segment -b 242 -f 9 -i '☰' -t ''
   }
 
 ##########CUSTOM################################################################
