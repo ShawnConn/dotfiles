@@ -61,6 +61,7 @@ if [[ "$(command -v antigen)" ]]; then
   fi
   antigen bundle MichaelAquilina/zsh-auto-notify
   antigen bundle MichaelAquilina/zsh-history-filter
+  antigen bundle romkatv/zsh-bench
   antigen bundle supercrabtree/k
   antigen bundle unixorn/docker-helpers.zshplugin@main
   antigen bundle unixorn/git-extra-commands@main
