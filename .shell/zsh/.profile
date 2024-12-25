@@ -5,14 +5,14 @@
 # cp .default.p10k.zsh ~/.p10k.zsh
 # sudo chsh -s $(which zsh) $(whoami)
 
-#######   BREW #################################################################
+#######   BREW LINUX ###########################################################
 if [[ ! -x "$(command -v brew)" && -d "/home/linuxbrew/" ]]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
-#######   M1   #################################################################
+#######   BREW MACOS ###########################################################
 CPU=$(sysctl -n machdep.cpu.brand_string 2>&1 || true)
-if [[ $CPU =~ "M1" && -x /opt/homebrew/bin/brew ]]; then
+if [[ $CPU =~ "Apple M*" && -x /opt/homebrew/bin/brew ]]; then
   eval $(/opt/homebrew/bin/brew shellenv)
 fi
 
