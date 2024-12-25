@@ -46,12 +46,11 @@ if [[ "$(command -v antigen)" ]]; then
   antigen bundle wd
   antigen bundle web-search
   antigen bundle yum
-  antigen bundle z
 
   # Other ZSH plugins
   antigen bundle djui/alias-tips
   antigen bundle Valiev/almostontop
-  antigen bundle changyuheng/fz
+  #antigen bundle changyuheng/fz
   antigen bundle cal2195/q
   antigen bundle hchbaw/opp.zsh
   antigen bundle hchbaw/zce.zsh
