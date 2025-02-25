@@ -817,7 +817,8 @@ augroup EASYMOTION
   " Require tpope/vim-repeat to enable dot repeat support
   " Jump to anywhere with only `s{char}{target}`
   " `s<CR>` repeat last find motion.
-  nm <Leader>f <Plug>(easymotion-s2)
+  nm <Leader>f <Plug>(easymotion-s)
+  nm <Leader><Leader>f <Plug>(easymotion-s2)
 
   "keep cursor column when JK motion
   let g:EasyMotion_startofline = 0
