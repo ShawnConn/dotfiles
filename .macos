@@ -715,6 +715,15 @@ sudo launchctl load -w /System/Library/LaunchDaemons/ssh.plist
 
 #sudo systemsetup -f -setremotelogin 'on' /System/Library/LaunchDaemons/ssh.plist
 
+
+###############################################################################
+# Other                                                                        #
+###############################################################################
+
+# AppleIntelligence
+defaults write com.apple.CloudSubscriptionFeatures.optIn "device" -bool "false"
+defaults write com.apple.CloudSubscriptionFeatures.optIn "auto_opt_in" -bool "false"
+
 ###############################################################################
 # Mail                                                                        #
 ###############################################################################
