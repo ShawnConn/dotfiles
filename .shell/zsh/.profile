@@ -98,7 +98,7 @@ bindkey -M vicmd 'K' run-help
 
 #VI MODE: Ctrl+Space to auto complete history command
 #10 ms key sequence for VI mode
-KEYTIMEOUT=1
+KEYTIMEOUT=20
 
 # Use B in cmd mode for editing buffer in vim
 autoload edit-command-line
