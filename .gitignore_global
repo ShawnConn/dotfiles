@@ -1,5 +1,6 @@
 .envrc
 .direnv
+.iterm_tab_color
 .slack
 .gh-pr.json
 .scannerwork
