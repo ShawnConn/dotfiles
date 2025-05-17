@@ -849,6 +849,21 @@ augroup FZF
         \ -g "!{.git,node_modules,vendor}/*" '
   command! -bang -nargs=* F
         \ call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
+  let g:fzf_layout = { 'down': '~40%' }
+  let g:fzf_colors = {
+  \ 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
 augroup END
 
 """""""GUTENTAGS"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1086,6 +1101,16 @@ augroup VIM-AUTOFORMAT
   let g:run_all_formatters_sh = 1
 
   nn <Leader>F :Autoformat<CR>
+augroup END
+
+"""""""VIM-COMPLETE"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+augroup VIM-COMPLETE
+  let g:vimcomplete_tab_enable = 1
+  let g:vimcomplete_cr_enable = 0
+
+  "let g:vimcomplete_options = { 'completor': {'noNewlineInCompletion': v:true, 'noNewlineInCompletionEver': v:true} }
+
+  "autocmd VimEnter * call g:VimCompleteOptionsSet(vimcomplete_options)
 augroup END
 
 """""""VIM-STICKY""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
