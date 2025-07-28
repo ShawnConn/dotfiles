@@ -593,6 +593,7 @@ augroup QUICK EDITS
   nn <Leader>eh :vsplit /etc/hosts<CR>
   nn <Leader>es :vsplit ~/.ssh/config<CR>
   nn <Leader>ez :vsplit ~/.zshrc<CR>
+  nn <Leader>eu :vsplit ~/.vundle.vimrc<CR>
 augroup END
 
 """""""""SEARCH""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1070,22 +1071,33 @@ augroup END
 
 """""""VIM-AI""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup VIM-AI
+  let g:vim_ai_roles_config_file = $HOME.'/.config/.vim-ai-roles.ini'
   " complete text on the current line or in visual selection
-  nn <leader>a :AI<CR>
-  xn <leader>a :AI<CR>
-  nn <leader>r :AIRedo<CR>
+  nn <leader><CR> :AI<CR>
+  xn <leader><CR> :AI<CR>
 
-  ":AI                                 complete the text on the current line
-  ":AI {prompt}                        complete the prompt
-  "<selection> :AI                     complete the selection
-  "<selection> :AI {instruction}       complete the selection using the instruction
-  "
-  "<selection>? :AIEdit                edit the current line or the selection
-  "<selection>? :AIEdit {instruction}  edit the current line or the selection using
-  "                                    the instruction
-  ":AIChat                             continue or start a new conversation.
-  "<selection>? :AIChat {instruction}? start a new conversation given the selection,
-  "                                    the instruction or both
+  nn <leader>\ :AIChat Explain this code<CR>
+  xn <leader>\ :AIChat Explain this code<CR>
+  nn <leader><leader><CR> :AI
+  xn <leader><leader><CR> :AI
+
+  nn <leader>r :AIRedo<CR>
+  " :AI {prompt}                        complete the prompt
+  " <selection> :AI                     complete the selection
+  " <selection> :AI {instruction}       complete the selection using the instruction
+  " <selection>? :AIEdit                edit the current line or the selection
+  " <selection>? :AIEdit {instruction}  edit the current line or the selection using
+  " :AIChat                             continue or start a new conversation.
+  " <selection>? :AIChat {instruction}? start a new conversation given the selection,
+  " :AIStopChat                          Cancel the currently running AI chat
+  " <selection>? :AIImage {instruction}? generate image given the selection or
+  "                                      the instruction
+  " :AIRedo                             repeat last AI command in order to re-try
+  "                                     or get an alternative completion.
+  " :AIUtilRolesOpen                    open role configuration file
+  " :AIUtilDebugOn                      turn on debug logging
+  " :AIUtilDebugOff                     turn off debug logging
+
 augroup END
 
 """""""VIM-AUTOFORMAT""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

@@ -16,9 +16,7 @@
 augroup PLUGINS
   if !has('nvim')
     Plugin 'joonty/vdebug'
-    Plugin 'madox2/vim-ai'
   endif
-  Plugin 'aduros/ai.vim'
   Plugin 'bling/vim-airline'
   Plugin 'chiel92/vim-autoformat'
   Plugin 'chr4/nginx.vim'
@@ -43,6 +41,8 @@ augroup PLUGINS
   Plugin 'leafgarland/typescript-vim'
   Plugin 'luciditi/vim-signature'
   Plugin 'ludovicchabant/vim-gutentags'
+  Plugin 'madox2/vim-ai'
+  Plugin 'madox2/vim-ai-provider-google'
   Plugin 'majutsushi/tagbar'
   Plugin 'mbbill/undotree'
   Plugin 'mtth/scratch.vim'
