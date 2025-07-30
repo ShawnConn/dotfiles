@@ -594,6 +594,7 @@ augroup QUICK EDITS
   nn <Leader>es :vsplit ~/.ssh/config<CR>
   nn <Leader>ez :vsplit ~/.zshrc<CR>
   nn <Leader>eu :vsplit ~/.vundle.vimrc<CR>
+  nn <Leader>eai :AIUtilRolesOpen<CR>
 augroup END
 
 """""""""SEARCH""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1072,32 +1073,36 @@ augroup END
 """""""VIM-AI""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup VIM-AI
   let g:vim_ai_roles_config_file = $HOME.'/.config/.vim-ai-roles.ini'
+
+  " run explain on the current visual selection
+  xn <leader>\ :AIC Explain this code<CR>
+
+  " open with starting prompt
+  nn <leader><leader>\ :AIC
+  xn <leader><leader>\ :AIC
+
   " complete text on the current line or in visual selection
   nn <leader><CR> :AI<CR>
   xn <leader><CR> :AI<CR>
 
-  nn <leader>\ :AIChat Explain this code<CR>
-  xn <leader>\ :AIChat Explain this code<CR>
+  " open AI prompt for gen code
   nn <leader><leader><CR> :AI
   xn <leader><leader><CR> :AI
 
-  nn <leader>r :AIRedo<CR>
-  " :AI {prompt}                        complete the prompt
-  " <selection> :AI                     complete the selection
-  " <selection> :AI {instruction}       complete the selection using the instruction
-  " <selection>? :AIEdit                edit the current line or the selection
-  " <selection>? :AIEdit {instruction}  edit the current line or the selection using
-  " :AIChat                             continue or start a new conversation.
-  " <selection>? :AIChat {instruction}? start a new conversation given the selection,
-  " :AIStopChat                          Cancel the currently running AI chat
-  " <selection>? :AIImage {instruction}? generate image given the selection or
-  "                                      the instruction
-  " :AIRedo                             repeat last AI command in order to re-try
-  "                                     or get an alternative completion.
-  " :AIUtilRolesOpen                    open role configuration file
-  " :AIUtilDebugOn                      turn on debug logging
-  " :AIUtilDebugOff                     turn off debug logging
+  " open AI chat
+  nn <leader><leader>? :AIC<CR>
 
+  " run AI edit or redo edit
+  xn <leader>' :AIE 
+  nn <leader><leader>' :AIR<CR>
+
+  " Not implemented yet
+  "nn <leader>??? :AII 
+  "xn <leader>??? :AII
+  "nn <leader>??? :AIStopChat<CR> 
+  "nn <leader>??? :AIUtilDebugOn<CR> 
+  "nn <leader>??? :AIUtilDebugOff<CR> 
+  "VSCODE
 augroup END
 
 """""""VIM-AUTOFORMAT""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
