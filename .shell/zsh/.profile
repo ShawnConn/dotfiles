@@ -58,8 +58,8 @@ else
 fi
 
 ##########PLUGINS CONFIGURATION#################################################
-#SUDO: !! to sudo command
-bindkey -M vicmd '!!' sudo-command-line
+#SUDO: Alt+Esc to sudo command
+bindkey -M vicmd '\e\e' sudo-command-line
 
 #ZSH-AUTOSUGGESTIONS: Set highlight color
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=59'

@@ -120,6 +120,10 @@ function print-tsv {
   column -t -s $'\t' "$@" | less -F -S -X -K
 }
 
+# Find and kill processes by name
+pskill() {
+  ps aux | grep "$1" | grep -v grep | awk '{print $2}' | xargs kill
+}
 #SSH without public key
 function ssh-nokey() {
   ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no "$@"
