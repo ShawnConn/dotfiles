@@ -110,7 +110,7 @@
     todo                    # todo items (https://github.com/todotxt/todo.txt-cli)
     timewarrior             # timewarrior tracking status (https://timewarrior.net/)
     taskwarrior             # taskwarrior task count (https://taskwarrior.org/)
-    #per_directory_history  # Oh My Zsh per-directory-history local/global indicator
+    # per_directory_history # Oh My Zsh per-directory-history local/global indicator
     # cpu_arch              # CPU architecture
     # ip                    # ip address and bandwidth usage for a specified network interface
     # public_ip             # public IP address
@@ -207,24 +207,24 @@
   typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=76
   # Colors for different vi modes
   typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_VICMD_FOREGROUND=0
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_VICMD_BACKGROUND=39
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_VICMD_BACKGROUND=190
   typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_VIVIS_FOREGROUND=0
   typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_VIVIS_BACKGROUND=214
   typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_VIINS_FOREGROUND=0
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_VIINS_BACKGROUND=190
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_VIINS_BACKGROUND=39 #190
   typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_VIOWR_FOREGROUND=0
   typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_VIOWR_BACKGROUND=190
   # Red prompt symbol if the last command failed.
   typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=3
   typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_{VIINS,VICMD,VIVIS,VIOWR}_BACKGROUND=1
   # Default prompt symbol.
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIINS_CONTENT_EXPANSION='❱'
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIINS_CONTENT_EXPANSION=' '
   # Prompt symbol in command vi mode.
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VICMD_CONTENT_EXPANSION=':'
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VICMD_CONTENT_EXPANSION=' '
   # Prompt symbol in visual vi mode.
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIVIS_CONTENT_EXPANSION=''
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIVIS_CONTENT_EXPANSION=' '
   # Prompt symbol in overwrite vi mode.
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIOWR_CONTENT_EXPANSION='▶'
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIOWR_CONTENT_EXPANSION='  '
   typeset -g POWERLEVEL9K_PROMPT_CHAR_OVERWRITE_STATE=true
   # No line terminator if prompt_char is the last segment.
   typeset -g POWERLEVEL9K_PROMPT_CHAR_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL='\uE0B4'
