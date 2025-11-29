@@ -99,8 +99,8 @@ augroup COMMANDS
   vn J :m '>+1<CR>gv=gv
   vn K :m '<-2<CR>gv=gv
 
-  "Esc visual mode w/ return
-  vn <CR> <Esc>
+  "Yank visual mode w/ return
+  vn <CR> y
 
   "Remap 0 to toggle home position
   nn 0 :call ToggleHomeZero()<CR>
