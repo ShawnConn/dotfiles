@@ -110,6 +110,18 @@ alias vundle-update='vim -u "$HOME/.vundle.vimrc" +PluginUpdate +qall'
 #Run a build of YCM after a vundle install
 alias vundle-ycm='cd ~/.vim/bundle/YouCompleteMe && ./install.py --all && cd -'
 
+#Run vim w/ vim-plug config and plugin clean & quit flags
+alias vim-plug-clean='vim -u "$HOME/.plugins.vimrc" +PluginClean! +qall'
+
+#Run vim w/ vim-plug config and plugin install & quit flags
+alias vim-plug-install='vim -u "$HOME/.plugins.vimrc" +PluginInstall +qall'
+
+#Run vim w/ vim-plug config and plugin update & quit flags
+alias vim-plug-update='vim -u "$HOME/.plugins.vimrc" +PluginUpdate +qall'
+
+#Run a build of YCM after a vim-plug install
+alias vim-plug-ycm='cd ~/.vim/plugged/YouCompleteMe && ./install.py --all && cd -'
+
 #Get external IP
 alias wanip="dig -4 TXT +short o-o.myaddr.l.google.com @ns1.google.com | tr -d '\"'"
 alias wanipv6="dig -6 TXT +short o-o.myaddr.l.google.com @ns1.google.com | tr -d '\"'"

@@ -16,6 +16,7 @@ Used as default for [env-setup](https://github.com/Luciditi/env-setup).
 - [`.macos`](.macos): MacOS config.
 - [`.notags`](.notags): Ctags flag.
 - [`.p10k.zsh`](.p10k.zsh): [PL10K](https://github.com/romkatv/powerlevel10k) ZSH theme config.
+- [`.plugins.vimrc`](.plugins.vimrc): Vim Plugins
 - [`.shell`](.shell): Misc shell config, aliases, completions, functions, & vars.
 - [`.vim`](.vim): Vim config.
 - [`.vimrc`](.vimrc): Vim config.
