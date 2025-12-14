@@ -1,19 +1,6 @@
 """""VIM-PLUG"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   set nocompatible              " be iMproved, required
 
-  " TESTING
-  " 1. UPDATE ENV-SETUP
-  "  `*/05-repos/requirements.yml` -> mv symlink 
-  "  `*/.00-init/requirements.yml` -> `- name: nass600.vundle` -> `- name: olivier-o.vim-plug`
-  "    - https://github.com/olivier-o/ansible-role-vim-plug
-  "  `*/01-config/main.yml` -> rm / update role
-  " 1. UPDATE .vimrc -> .plugins.vimrc & leader
-  " 1. ADD/RM .plugins.vimrc & .vundle.vimrc
-  " 1. UPDATE README.md
-  " 1. UPDATE .shell/*/alias vundle aliases
-  " 1. :PlugInstall
-  " 1. rm -rf ~/.vim/bundle
-
   " via https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
   " Install vim-plug if not found
   if empty(glob('~/.vim/autoload/plug.vim'))

@@ -1,8 +1,7 @@
 """""""LUCIDITI .VIMRC"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"""""""VUNDLE""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-source $HOME/.vundle.vimrc
-"source $HOME/.plugins.vimrc
+"""""""PLUGINS"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+source $HOME/.plugins.vimrc
 
 """""""SOURCES"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup SOURCES
@@ -595,7 +594,7 @@ augroup QUICK EDITS
   nn <Leader>es :vsplit ~/.ssh/config<CR>
   nn <Leader>ez :vsplit ~/.zshrc<CR>
   nn <Leader>eu :vsplit ~/.vundle.vimrc<CR>
-  "nn <Leader>ep :vsplit ~/.plugins.vimrc<CR>
+  nn <Leader>ep :vsplit ~/.plugins.vimrc<CR>
   nn <Leader>eai :AIUtilRolesOpen<CR>
 augroup END
 

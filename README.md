@@ -20,6 +20,5 @@ Used as default for [env-setup](https://github.com/Luciditi/env-setup).
 - [`.shell`](.shell): Misc shell config, aliases, completions, functions, & vars.
 - [`.vim`](.vim): Vim config.
 - [`.vimrc`](.vimrc): Vim config.
-- [`.vundle.vimrc`](.vundle.vimrc): Vundle-only Vim config.
 - [`.zshrc`](.zshrc): Zsh config.
 - [`README.md`](README.md): Temet nosce.
