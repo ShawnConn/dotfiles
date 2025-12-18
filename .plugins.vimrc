@@ -54,6 +54,7 @@ augroup PLUGINS
   Plug 'mtth/scratch.vim'
   Plug 'mxw/vim-jsx'
   Plug 'myint/syntastic-extras'
+  "Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'osyo-manga/vim-hopping'
   Plug 'osyo-manga/vim-over'
   Plug 'pangloss/vim-javascript'
