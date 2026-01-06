@@ -1251,20 +1251,21 @@ augroup VIM-AI
   nn <leader><leader>\ :AIC
   xn <leader><leader>\ :AIC
 
-  " complete text on the current line or in visual selection
-  nn <leader><CR> :AI<CR>
-  xn <leader><CR> :AI<CR>
+  " open AI chat
+  nn <leader><CR> :AIC<CR>
 
   " open AI prompt for gen code
   nn <leader><leader><CR> :AI
   xn <leader><leader><CR> :AI
 
-  " open AI chat
-  nn <leader><leader>? :AIC<CR>
+
+  " complete text on the current line or in visual selection
+  "nn <leader><CR> :AI<CR>
+  "xn <leader><CR> :AI<CR>
 
   " run AI edit or redo edit
-  xn <leader>' :AIE 
-  nn <leader><leader>' :AIR<CR>
+  "xn <leader>' :AIE 
+  "nn <leader><leader>' :AIR<CR>
 
   " Not implemented yet
   "nn <leader>??? :AII 
