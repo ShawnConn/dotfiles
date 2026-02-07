@@ -32,7 +32,6 @@ augroup PLUGINS
   Plug 'ernstwi/vim-sticky'
   Plug 'evidens/vim-twig'
   Plug 'girishji/autosuggest.vim'
-  Plug 'girishji/vimcomplete'
   "Plug 'github/copilot.vim'
   Plug 'glench/vim-jinja2-syntax'
   Plug 'godlygeek/tabular'
@@ -54,7 +53,7 @@ augroup PLUGINS
   Plug 'mtth/scratch.vim'
   Plug 'mxw/vim-jsx'
   Plug 'myint/syntastic-extras'
-  "Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'osyo-manga/vim-hopping'
   Plug 'osyo-manga/vim-over'
   Plug 'pangloss/vim-javascript'
