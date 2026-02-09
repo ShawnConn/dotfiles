@@ -597,6 +597,7 @@ augroup QUICK EDITS
   nn <Leader>es :vsplit ~/.ssh/config<CR>
   nn <Leader>ez :vsplit ~/.zshrc<CR>
   nn <Leader>ep :vsplit ~/.plugins.vimrc<CR>
+  nn <Leader>ec :vsplit ~/.vim/coc-settings.json<CR>
   nn <Leader>eai :AIUtilRolesOpen<CR>
 augroup END
 
