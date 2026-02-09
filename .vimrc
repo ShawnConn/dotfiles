@@ -626,7 +626,7 @@ augroup SEARCH
   vn <silent> * y:/<C-R>"<CR>
   vn <silent> # y:?<C-R>"<CR>
 
-  "LeaderjESC will toggle off search highlighting
+  "Leader+ESC will toggle off search highlighting
   nn <Leader><ESC> :nohlsearch<CR>
 
   "Search from highlight mode
@@ -795,12 +795,7 @@ augroup END
 
 """""""""COC"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup COC
-  ":CocInstall coc-ansible coc-css coc-fzf-preview coc-go coc-git coc-html 
-  " coc-json coc-markdownlint coc-nginx coc-pydocstring coc-pyright coc-phpls 
-  "coc-sh coc-sql coc-toml coc-tsserver coc-xml coc-yaml
-  "coc-vimlsp
-  "
-  " https://raw.githubusercontent.com/neoclide/coc.nvim/master/doc/coc-example-config.vim
+  " Ex: https://raw.githubusercontent.com/neoclide/coc.nvim/master/doc/coc-example-config.vim
 
   " May need for Vim (not Neovim) since coc.nvim calculates byte offset by count
   " utf-8 byte sequence
@@ -943,6 +938,7 @@ augroup COC
      "\ 'coc-fzf-preview',
      \ 'coc-git',
      \ 'coc-go',
+     \ 'coc-html',
      \ 'coc-json', 
      \ 'coc-lightbulb', 
      \ 'coc-markdown-preview-enhanced',
@@ -958,6 +954,8 @@ augroup COC
      \ 'coc-spell-checker',
      \ 'coc-sql',
      \ 'coc-toml',
+     \ 'coc-tsserver',
+     \ 'coc-vimlsp',
      \ 'coc-yank',
      \ 'coc-webview',
      \ 'coc-xml',
