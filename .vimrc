@@ -930,13 +930,14 @@ augroup COC
 
   " Get Extensions
   " https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
+     "\ 'coc-copilot', 
+     "\ 'coc-fzf-preview',
+     "\ 'coc-prettier',
   let g:coc_global_extensions = [
      \ '@yaegassy/coc-ansible',
-     "\ 'coc-copilot', 
      \ 'coc-css', 
      \ 'coc-docker',
      \ 'coc-explorer',
-     "\ 'coc-fzf-preview',
      \ 'coc-git',
      \ 'coc-go',
      \ 'coc-html',
@@ -945,7 +946,6 @@ augroup COC
      \ 'coc-markdown-preview-enhanced',
      \ '@yaegassy/coc-nginx',
      \ 'coc-phpactor',
-     "\ 'coc-prettier',
      \ 'coc-pydocstring',
      \ 'coc-pyright',
      \ 'coc-rome',
