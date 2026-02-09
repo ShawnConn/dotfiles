@@ -50,7 +50,7 @@ augroup END
 
 """""""AUTOCOMPLETE""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup AUTOCOMPLETE
-  "j/k to naviate
+  "j/k to navigate
   "autocomplete menu
   ino <expr> J ((pumvisible())?("\<C-n>"):("J"))
   ino <expr> K ((pumvisible())?("\<C-p>"):("K"))
@@ -164,6 +164,9 @@ augroup COMMANDS
   nn <Leader>t9 :tabn 9<CR>
   nn <Leader>t0 :tabl<CR>
 
+  " Delete marker
+  nn <Leader>d' :delm 
+
   "Buffer quit
   nn <Leader>bq :bp<Bar>sp<Bar>bn<Bar>bd<CR>
   nn <Leader>bc :%bd<CR>
@@ -174,17 +177,17 @@ augroup COMMANDS
   "Tab quit
   nn <Leader>tq :tabclose<CR>
 
-  "Pressing <Leader>sp will toggle and untoggle spell checking
+  "Pressing <Leader>sp will toggle and un-toggle spell checking
   nn <Leader>sp :setlocal spell!<CR>
 
   "Use paste mode with yo, yO, yi, yI, ya, yA
   nn <Leader>yp :set paste!<CR>
-  nn <silent> yo  :set paste<CR>o
-  nn <silent> yO  :set paste<CR>O
-  nn <silent> yi  :set paste<CR>i
-  nn <silent> yI  :set paste<CR>I
-  nn <silent> ya  :set paste<CR>a
-  nn <silent> yA  :set paste<CR>A
+  nn <silent>yo  :set paste<CR>o
+  nn <silent>yO  :set paste<CR>O
+  nn <silent>yi  :set paste<CR>i
+  nn <silent>yI  :set paste<CR>I
+  nn <silent>ya  :set paste<CR>a
+  nn <silent>yA  :set paste<CR>A
 
   " P or <Leader>p will keep register contents
   vn P "_dP
@@ -593,7 +596,6 @@ augroup QUICK EDITS
   nn <Leader>eh :vsplit /etc/hosts<CR>
   nn <Leader>es :vsplit ~/.ssh/config<CR>
   nn <Leader>ez :vsplit ~/.zshrc<CR>
-  nn <Leader>eu :vsplit ~/.vundle.vimrc<CR>
   nn <Leader>ep :vsplit ~/.plugins.vimrc<CR>
   nn <Leader>eai :AIUtilRolesOpen<CR>
 augroup END
@@ -932,19 +934,21 @@ augroup COC
 
   " Get Extensions
   " https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
-  " coc-copilot 
-  " coc-fzf-preview
-  " coc-go
-  " coc-nginx
-  " coc-phpactor
   let g:coc_global_extensions = [
      \ '@yaegassy/coc-ansible',
+     "\ 'coc-copilot', 
      \ 'coc-css', 
      \ 'coc-docker',
      \ 'coc-explorer',
+     "\ 'coc-fzf-preview',
      \ 'coc-git',
+     \ 'coc-go',
      \ 'coc-json', 
-     \ 'coc-markdownlint',
+     \ 'coc-lightbulb', 
+     \ 'coc-markdown-preview-enhanced',
+     \ '@yaegassy/coc-nginx',
+     \ 'coc-phpactor',
+     "\ 'coc-prettier',
      \ 'coc-pydocstring',
      \ 'coc-pyright',
      \ 'coc-rome',
@@ -955,9 +959,13 @@ augroup COC
      \ 'coc-sql',
      \ 'coc-toml',
      \ 'coc-yank',
+     \ 'coc-webview',
      \ 'coc-xml',
      \ 'coc-yaml',
      \ ]
+
+  " Generate Markdown Preview
+  nm <Leader>mdp :CocCommand markdown-preview-enhanced.openPreview<CR>
 augroup END
 
 """""""DOGE""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1370,7 +1378,7 @@ augroup HELPER
     endif
   endfunction
 
-"""""""""TOGGLE THE HOME POSITON"""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""TOGGLE THE HOME POSITION""""""""""""""""""""""""""""""""""""""""""""""
   "Credits to https://ddrscott.github.io/blog/2016/vim-toggle-movement/
   function! ToggleHomeZero()
     let pos = getpos('.')
