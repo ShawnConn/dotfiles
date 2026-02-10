@@ -1265,14 +1265,13 @@ augroup VIM-AI
   nn <leader><leader><CR> :AI
   xn <leader><leader><CR> :AI
 
-
   " complete text on the current line or in visual selection
-  "nn <leader><CR> :AI<CR>
-  "xn <leader><CR> :AI<CR>
+  nn <leader><CR> :AI<CR> 
+  xn <leader><CR> :AI<CR>
 
   " run AI edit or redo edit
-  "xn <leader>' :AIE 
-  "nn <leader><leader>' :AIR<CR>
+  xn <leader>' :AIE 
+  nn <leader><leader>' :AIR<CR>
 
   " Not implemented yet
   "nn <leader>??? :AII 
