@@ -1404,7 +1404,7 @@ augroup COLORS
   let g:solarized_termtrans=1
   let g:solarized_termcolors=256
   let g:solarized_degrade=1
-  colorscheme solarized
+  colorscheme xterm16
 
   "Line Colors
   highlight LineNr ctermbg=236
