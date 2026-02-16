@@ -165,7 +165,7 @@ augroup COMMANDS
   nn <Leader>t0 :tabl<CR>
 
   " Delete marker
-  nn <Leader>d' :delm 
+  nn <Leader>d' :delm
 
   "Buffer quit
   nn <Leader>bq :bp<Bar>sp<Bar>bn<Bar>bd<CR>
@@ -930,19 +930,19 @@ augroup COC
 
   " Get Extensions
   " https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
-     "\ 'coc-copilot', 
+     "\ 'coc-copilot',
      "\ 'coc-fzf-preview',
      "\ 'coc-prettier',
   let g:coc_global_extensions = [
      \ '@yaegassy/coc-ansible',
-     \ 'coc-css', 
+     \ 'coc-css',
      \ 'coc-docker',
      \ 'coc-explorer',
      \ 'coc-git',
      \ 'coc-go',
      \ 'coc-html',
-     \ 'coc-json', 
-     \ 'coc-lightbulb', 
+     \ 'coc-json',
+     \ 'coc-lightbulb',
      \ 'coc-markdown-preview-enhanced',
      \ '@yaegassy/coc-nginx',
      \ 'coc-phpactor',
@@ -1266,19 +1266,19 @@ augroup VIM-AI
   xn <leader><leader><CR> :AI
 
   " complete text on the current line or in visual selection
-  nn <leader><CR> :AI<CR> 
+  nn <leader><CR> :AI<CR>
   xn <leader><CR> :AI<CR>
 
   " run AI edit or redo edit
-  xn <leader>' :AIE 
+  xn <leader>' :AIE
   nn <leader><leader>' :AIR<CR>
 
   " Not implemented yet
-  "nn <leader>??? :AII 
+  "nn <leader>??? :AII
   "xn <leader>??? :AII
-  "nn <leader>??? :AIStopChat<CR> 
-  "nn <leader>??? :AIUtilDebugOn<CR> 
-  "nn <leader>??? :AIUtilDebugOff<CR> 
+  "nn <leader>??? :AIStopChat<CR>
+  "nn <leader>??? :AIUtilDebugOn<CR>
+  "nn <leader>??? :AIUtilDebugOff<CR>
   "VSCODE
 augroup END
 
