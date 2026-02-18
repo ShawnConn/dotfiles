@@ -270,6 +270,7 @@ if [[ -x "$(command -v atuin)" ]]; then
 
   # bind to Ctrl+u
   bindkey '^u' atuin-search
+  bindkey -M vicmd '^u' atuin-search
 
   # bind to the up key, which depends on terminal mode
   bindkey '^[[A' atuin-up-search
