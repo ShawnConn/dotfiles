@@ -1399,11 +1399,7 @@ augroup END
 """""""COLORS""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup COLORS
   "Sample colors @ http://bytefluent.com/vivify/
-  "Solarize VIM
   set background=dark
-  let g:solarized_termtrans=1
-  let g:solarized_termcolors=256
-  let g:solarized_degrade=1
   colo valloric
 
   "Line Colors
@@ -1412,8 +1408,9 @@ augroup COLORS
   highlight LineNr gui=NONE guifg=DarkGrey guibg=NONE
 
   "Cursor Highlight Colors
-  hi CursorLine  cterm=NONE ctermbg=234 ctermfg=253
-  hi CursorColumn  cterm=NONE ctermbg=234 ctermfg=253
+  hi CursorLine  cterm=NONE ctermbg=234 ctermfg=35
+  hi CursorColumn  cterm=NONE ctermbg=234 ctermfg=35
+  hi Visual cterm=NONE ctermbg=67 ctermfg=0
 
   " Mark 80 char boundary
   set colorcolumn=81
