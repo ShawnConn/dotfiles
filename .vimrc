@@ -862,6 +862,7 @@ augroup COC
 
   " Applying code actions to the selected code block
   " Example: `<leader>aap` for current paragraph
+  " Example: `<leader>aw` for current word
   xmap <leader>a  <Plug>(coc-codeaction-selected)
   nmap <leader>a  <Plug>(coc-codeaction-selected)
 
