@@ -239,6 +239,10 @@ fi
 export PATH
 umask 007
 
+# Macro Registering
+Q_SET='='
+Q_RUN=','
+Q_UNSET='~'
 
 #######   ZSH   ################################################################
 # Filters for history
