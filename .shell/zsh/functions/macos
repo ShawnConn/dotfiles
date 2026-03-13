@@ -124,3 +124,23 @@ function macos-switch-dns() {
 
   echo "The DNS has been set to" "${DNS[@]}"
 }
+
+# Clear Notification Center messages
+function macos-clear-notifications() {
+    IS_TAHOE=$(sw_vers -productVersion \
+        | grep -q "^26\." && echo "1" || echo "Not Tahoe")
+
+    if [[ "$IS_TAHOE" == "1" ]]; then
+        DB_FILE="$HOME/Library/Group Containers/group.com.apple.usernoted/db2/db"
+    else
+        DB_FILE="$(getconf DARWIN_USER_DIR)com.apple.notificationcenter/db2/db"
+    fi
+
+    # PENDING
+    sqlite3 "$DB_FILE" "DELETE FROM record;"
+
+    # OLD / GROUPED
+    sqlite3 "$DB_FILE" "DELETE FROM displayed;"
+
+    echo "Notification records deleted."
+}
