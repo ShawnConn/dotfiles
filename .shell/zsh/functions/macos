@@ -144,3 +144,19 @@ function macos-clear-notifications() {
 
     echo "Notification records deleted."
 }
+
+# Set TouchID on
+function macos-touch-on() {
+    sudo bioutil -w -u 1
+}
+
+# Set TouchID off
+function macos-touch-off() {
+    sudo bioutil -w -u 0
+}
+
+# Reset TouchID
+function macos-touch-reset() {
+    macos-touch-off
+    macos-touch-on
+}
