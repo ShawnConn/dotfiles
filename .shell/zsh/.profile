@@ -279,6 +279,9 @@ if [[ -x "$(command -v atuin)" ]]; then
   # bind to the up key, which depends on terminal mode
   bindkey '^[[A' atuin-up-search
   bindkey '^[OA' atuin-up-search
+
+  # Enable hex
+  # eval "$(atuin hex init)"
 fi
 
 #######   AUTONOTIFY   #########################################################
