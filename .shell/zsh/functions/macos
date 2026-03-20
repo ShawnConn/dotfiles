@@ -147,12 +147,12 @@ function macos-clear-notifications() {
 
 # Set TouchID on
 function macos-touch-on() {
-    sudo bioutil -w -u 1
+    sudo bioutil -w -s -u 1
 }
 
 # Set TouchID off
 function macos-touch-off() {
-    sudo bioutil -w -u 0
+    sudo bioutil -w -s -u 0
 }
 
 # Reset TouchID
