@@ -1,4 +1,3 @@
-#!/bin/bash
 # pv wrapper that imitates cp usage
 #
 # Copyleft 2017 by Ignacio Nunez Hernanz <nacho _a_t_ ownyourbits _d_o_t_ com>
@@ -72,6 +71,7 @@ function mpv()
   cmp --silent "$1" "$2" || return 1
   rm -rf "$1"
 }
+
 # License
 #
 # This script is free software; you can redistribute it and/or modify it

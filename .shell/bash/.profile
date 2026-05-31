@@ -1,9 +1,19 @@
 #!/usr/bin/env bash
 
 #######   ALIASES   ############################################################
-source "$HOME/.shell/bash/alias"
+source "$HOME/.shell/common/alias"
+if [ -f "$HOME/.shell/bash/alias" ]; then
+  source "$HOME/.shell/bash/alias"
+fi
 
 #######   FUNCTIONS   ##########################################################
+# Load shared functions
+for FUNCTIONS in "$HOME"/.shell/common/functions/*; do
+  [ -e "$FUNCTIONS" ] || continue
+  source "$FUNCTIONS"
+done
+
+# Load Bash-specific functions
 for FUNCTIONS in "$HOME"/.shell/bash/functions/*; do
   [ -e "$FUNCTIONS" ] || continue
   source "$FUNCTIONS"

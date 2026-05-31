@@ -11,9 +11,8 @@ if [[ ! -x "$(command -v brew)" && -d "/home/linuxbrew/" ]]; then
 fi
 
 #######   BREW MACOS ###########################################################
-CPU=$(sysctl -n machdep.cpu.brand_string 2>&1 || true)
-if [[ $CPU =~ "Apple M*" && -x /opt/homebrew/bin/brew ]]; then
-  eval $(/opt/homebrew/bin/brew shellenv)
+if [[ -x /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 #######   ANTIGEN  #############################################################
@@ -71,7 +70,7 @@ bindkey '^x' autosuggest-clear
 bindkey '^_' autosuggest-execute
 
 # Check bin existence
-function exists { which $1 &> /dev/null }
+function exists { command -v "$1" >/dev/null 2>&1; }
 
 #ZSH-AUTOSUGGESTIONS: Ctrl+Space to auto complete history command | (or Ctrl+R if empty)
 function _zle-autosuggest-accept {
@@ -165,9 +164,18 @@ zle -N my-backward-delete-word
 bindkey '^W' my-backward-delete-word
 
 #######   ALIASES   ############################################################
-source "$HOME/.shell/zsh/alias"
+source "$HOME/.shell/common/alias"
+if [ -f "$HOME/.shell/zsh/alias" ]; then
+  source "$HOME/.shell/zsh/alias"
+fi
 
-#######   FUNCTIONS   ##########################################################
+# Load shared functions
+for FUNCTIONS in "$HOME"/.shell/common/functions/*; do
+  [ -e "$FUNCTIONS" ] || continue
+  source "$FUNCTIONS"
+done
+
+# Load Zsh-specific functions
 for FUNCTIONS in "$HOME"/.shell/zsh/functions/*; do
   [ -e "$FUNCTIONS" ] || continue
   source "$FUNCTIONS"

@@ -1,5 +1,5 @@
 # Usage:
-#   Source this script from your Bash start-up script (eg. ~/.bashrc, ~/.bash_profile).
+#   Source this script from your start-up script (eg. ~/.bashrc, ~/.zshrc).
 #
 # Setting titles:
 #   title something
@@ -80,6 +80,11 @@ function tab_dark_green { title "$1"; tab_color 0 100 0; }
 function tab_forest_green { title "$1"; tab_color 34  139 34; }
 function tab_lime { title "$1"; tab_color 0 255 0; }
 function tab_lime_green { title "$1"; tab_color 50  205 50; }
+# For backward compatibility / syntax aliases
+if [ -z "$BASH_VERSION" ]; then
+  # Zsh specific function styling or alias could go here
+  :
+fi
 function tab_light_green { title "$1"; tab_color 144 238 144; }
 function tab_pale_green { title "$1"; tab_color 152 251 152; }
 function tab_dark_sea_green { title "$1"; tab_color 143 188 143; }
@@ -109,7 +114,7 @@ function tab_dodger_blue { title "$1"; tab_color 30  144 255; }
 function tab_light_blue { title "$1"; tab_color 173 216 230; }
 function tab_sky_blue { title "$1"; tab_color 135 206 235; }
 function tab_light_sky_blue { title "$1"; tab_color 135 206 250; }
-function tab_midnight_blue { title "$1"; tab_color 25  25_ 112; }
+function tab_midnight_blue { title "$1"; tab_color 25  25  112; }
 function tab_navy { title "$1"; tab_color 0 0 128; }
 function tab_dark_blue { title "$1"; tab_color 0 0 139; }
 function tab_medium_blue { title "$1"; tab_color 0 0 205; }
@@ -123,7 +128,7 @@ function tab_medium_purple { title "$1"; tab_color 147 112 219; }
 function tab_dark_magenta { title "$1"; tab_color 139 0 139; }
 function tab_dark_violet { title "$1"; tab_color 148 0 211; }
 function tab_dark_orchid { title "$1"; tab_color 153 50 204; }
-function tab_medium_orchid { title "$1"; tab_color 186 85_ 211; }
+function tab_medium_orchid { title "$1"; tab_color 186 85  211; }
 function tab_purple { title "$1"; tab_color 128 0 128; }
 function tab_thistle { title "$1"; tab_color 216 191 216; }
 function tab_plum { title "$1"; tab_color 221 160 221; }
@@ -163,8 +168,11 @@ function tab_old_lace { title "$1"; tab_color 253 245 230; }
 function tab_papaya_whip { title "$1"; tab_color 255 239 213; }
 function tab_sea_shell { title "$1"; tab_color 255 245 238; }
 function tab_mint_cream { title "$1"; tab_color 245 255 250; }
+# Note: Line 112 in original bash/zsh file has tab_midnight_blue with "25_ 112" color, let's fix it to "25 25 112"
 function tab_slate_gray { title "$1"; tab_color 112 128 144; }
 function tab_light_slate_gray { title "$1"; tab_color 119 136 153; }
+# Note: "tab_midnight_blue" was "25 25_ 112" in original script, which looks like a typo. Corrected to "25 25 112" below.
+function tab_midnight_blue { title "$1"; tab_color 25 25 112; }
 function tab_light_steel_blue { title "$1"; tab_color 176 196 222; }
 function tab_lavender { title "$1"; tab_color 230 230 250; }
 function tab_floral_white { title "$1"; tab_color 255 250 240; }

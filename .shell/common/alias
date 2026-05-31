@@ -1,0 +1,101 @@
+# Shared POSIX-compatible aliases loaded by both Bash and Zsh.
+
+########## ALIASES #############################################################
+alias env-setup="$HOME/env-setup/scripts/env-setup"
+
+########## NAV #################################################################
+alias ..1='cd ..'
+alias ..2='cd ../..'
+alias ..3='cd ../../..'
+alias ..4='cd ../../../..'
+alias ..5='cd ../../../../..'
+alias ..6='cd ../../../../../..'
+alias ..7='cd ../../../../../../..'
+alias ..8='cd ../../../../../../../..'
+alias ..9='cd ../../../../../../../../..'
+
+# Shortcut detailed listing
+alias lsl='ls -al'
+
+# Previous dir
+alias pd='cd -'
+
+# Use Tree w/ hidden & Git dirs excluded
+alias tree='tree -a -I .git'
+
+# Colorize watch
+alias watch='watch -c '
+
+########## NET #################################################################
+
+# Get external IP
+alias wanip="dig -4 TXT +short o-o.myaddr.l.google.com @ns1.google.com | tr -d '\"'"
+alias wanipv6="dig -6 TXT +short o-o.myaddr.l.google.com @ns1.google.com | tr -d '\"'"
+
+# WGet to StdOut
+alias wgetout='wget -qO- '
+
+########## DIFF ################################################################
+command -v colordiff >/dev/null 2>&1 && { alias diff="colordiff"; }
+
+## Silver search w/ hidden & Git dirs excluded
+alias ag='ag --hidden --ignore-dir .git'
+
+# Colorize grep
+alias grep='grep --color=always'
+
+########## GIT #################################################################
+alias g='git'
+
+# Retrieve git remote
+alias git-remote-current="git branch -vv | grep '\* ' | sed 's/.*\[\(.*\)\].*/\1/g; s/.*(HEAD detached at \(.*\)).*/\1/g; s/\* \(.*\)                           .*/\1/g; s/\*\ \([^ ]*\)\ .*/\1/g'"
+
+# Git push all branches
+alias git-push-branches='git push -u $(git config --get branch.master.remote) --all'
+
+# No RC Vim
+alias nrcvim='vim -u NONE'
+
+# Toggle Show/Hide hidden files in Finder
+alias macos-file-hide='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
+alias macos-file-show='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
+
+# Network setup
+alias macos-net-change='networksetup -switchtolocation'
+
+# OS-dependant aliases
+case "$OSTYPE" in
+  "darwin"* )
+    # SVIM = root edit w/ .vimrc config
+    alias svim='sudo vim'
+    alias shuf='gshuf'
+    ;;
+  "linux-gnu" )
+    # SVIM = root edit w/ .vimrc config
+    alias svim='sudoedit'
+    ;;
+  * )
+    ;;
+esac
+
+# Repeat last command as root
+alias resu='sudo $(fc -ln -1)'
+
+########## VIM #################################################################
+# Use MacVim In Terminal
+if [ -f /Applications/MacVim.app/Contents/MacOS/Vim ]; then
+  alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
+  alias mvim='/Applications/MacVim.app/Contents/MacOS/Vim'
+fi
+
+# Run vim w/ vim-plug config and plugin clean & quit flags
+alias vim-plug-clean='vim -u "$HOME/.plugins.vimrc" +PluginClean! +qall'
+
+# Run vim w/ vim-plug config and plugin install & quit flags
+alias vim-plug-install='vim -u "$HOME/.plugins.vimrc" +PluginInstall +qall'
+
+# Run vim w/ vim-plug config and plugin update & quit flags
+alias vim-plug-update='vim -u "$HOME/.plugins.vimrc" +PluginUpdate +qall'
+
+# Run a build of YCM after a vim-plug install
+alias vim-plug-ycm='cd ~/.vim/plugged/YouCompleteMe && ./install.py --all && cd -'

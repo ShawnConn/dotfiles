@@ -1,9 +1,8 @@
-#!/usr/bin/env bash
 ##
 ## macos: macOS-env specific functions.
 ##
 
-#Show all defaults
+# Show all defaults
 function macos-show-defaults {
   for i in $(defaults domains | tr ',' '\n'); do
     echo "********* READING DEFAULT DOMAIN $i **********";
@@ -12,7 +11,7 @@ function macos-show-defaults {
   done
 }
 
-#Empty the OSX icon cache
+# Empty the OSX icon cache
 function macos-empty-icon-cache {
   sudo rm -rfv /Library/Caches/com.apple.iconservices.store &> /dev/null
   sudo find /private/var/folders/ \( -name com.apple.dock.iconcache -or -name com.apple.iconservices \) -exec rm -rfv {} \; &> /dev/null
@@ -27,12 +26,12 @@ function macos-empty-icon-cache {
   echo "macOS icon cache emptied."
 }
 
-#List all bundle ids
+# List all bundle ids
 function macos-list-bundle-ids {
   lsappinfo | grep 'bundleID="' | cut -d'"' -f2 | sort
 }
 
-#Open a specfied OSX PrefPane
+# Open a specified OSX PrefPane
 function macos-pref {
   if [[ -n "$1" ]]; then
     if [[ -d "/System/Library/PreferencePanes/$1.prefPane" ]]; then
@@ -41,13 +40,13 @@ function macos-pref {
   fi
 }
 
-#Connect to a Tunnelblick configured VPN
+# Set Microphone Volume
 function macos-mic-vol {
   VOL_PERCENT=${1:-0}
   osascript -e "tell application \"System Events\" to set volume input volume $VOL_PERCENT"
 }
 
-#Connect to a Tunnelblick configured VPN
+# Connect to a Tunnelblick configured VPN
 function macos-ovpn-connect {
   if [[ -z "$1" ]]; then
     return 1
@@ -59,7 +58,7 @@ end tell
 EOF
 }
 
-#Disconnect to a Tunnelblick configured VPN
+# Disconnect from a Tunnelblick configured VPN
 function macos-ovpn-disconnect {
   if [[ -z "$1" ]]; then
     return 1
@@ -71,8 +70,8 @@ end tell
 EOF
 }
 
-#Connect to a MacOSX configured VPN
-#Config is stored in /Library/Preferences/SystemConfiguration/preferences.plist
+# Connect to a MacOSX configured VPN
+# Config is stored in /Library/Preferences/SystemConfiguration/preferences.plist
 function macos-vpn-connect {
   if [[ -z "$1" ]]; then
     return 1
@@ -90,8 +89,8 @@ end tell
 EOF
 }
 
-#Disconnect from a MacOSX configured VPN
-#Config is stored in /Library/Preferences/SystemConfiguration/preferences.plist
+# Disconnect from a MacOSX configured VPN
+# Config is stored in /Library/Preferences/SystemConfiguration/preferences.plist
 function macos-vpn-disconnect {
   if [[ -z "$1" ]]; then
     return 1
@@ -107,7 +106,7 @@ return
 EOF
 }
 
-#Set the DNS for all net services
+# Set the DNS for all net services
 function macos-switch-dns() {
   # Select DNS option
   if [[ "$1" == "CF" ]]; then
@@ -121,9 +120,7 @@ function macos-switch-dns() {
   fi
 
   # Assume only one Net location
-  #NET=$(networksetup -listlocations | head -n1)
   SERVICES=$(networksetup -listallnetworkservices | tail -n +2)
-  #ROUTER_IP=$(networksetup -getinfo "$SERVICE" | grep '^Router: ' | cut -f2 -d' ' | xargs)
 
   echo "$SERVICES" | while read -r SERVICE ; do
     networksetup -setdnsservers "$SERVICE" "${DNS[@]}"
@@ -132,8 +129,24 @@ function macos-switch-dns() {
   echo "The DNS has been set to" "${DNS[@]}"
 }
 
-#Attempt WiFi Relogin
+# Attempt WiFi Relogin
 function macos-wifi-relogin {
   echo "GATEWAY: http://$(netstat -rn | grep default | awk '{print $2}')/"
   open "http://www.gstatic.com/generate_204"
+}
+
+# Set TouchID on
+function macos-touch-on() {
+  sudo bioutil -w -s -u 1
+}
+
+# Set TouchID off
+function macos-touch-off() {
+  sudo bioutil -w -s -u 0
+}
+
+# Reset TouchID
+function macos-touch-reset() {
+  macos-touch-off
+  macos-touch-on
 }
