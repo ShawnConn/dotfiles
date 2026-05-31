@@ -16,6 +16,9 @@ if [[ -x /opt/homebrew/bin/brew ]]; then
 fi
 
 #######   ANTIGEN  #############################################################
+export ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
+mkdir -p "$ZSH_CACHE_DIR/completions"
+
 if [[ -f "$HOME/.shell/zsh/.profile.antigen" ]]; then
   source "$HOME/.shell/zsh/.profile.antigen"
 fi
