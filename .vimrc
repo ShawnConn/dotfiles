@@ -652,7 +652,9 @@ augroup SETTINGS
 
   "Set Backup Dir
   set backupdir =~/.vim/backup//
-  set backup
+  " Some servers have issues with backup files (e.g. coc.nvim), so keep backups off
+  set nobackup
+  set nowritebackup
 
   "Set Swap Dir
   set directory =~/.vim/swap//
@@ -718,10 +720,7 @@ augroup END
 """""""""PLUGIN CONFIGURATIONS"""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"""""""""TEMPLATE""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-augroup TEMPLATE
 
-augroup END
 
 """""""""AIRLINE"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup AIRLINE
@@ -762,8 +761,8 @@ augroup AIRLINE
 
   let g:airline#extensions#gutentags#enabled = 1
 
-  "Syntastic
-  let g:airline#extensions#syntastic#enabled = 1
+  "Syntastic (disabled)
+  let g:airline#extensions#syntastic#enabled = 0
 
   "Add Buffer Index
   let g:airline#extensions#tabline#buffer_idx_mode = 1
@@ -781,11 +780,7 @@ augroup AIRLINE
   let g:airline_section_z = '%3p%% %l:%c|0x%B'
 augroup END
 
-"""""""""AUTOCOMPLPOP""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-augroup AUTOCOMPLPOP
-  let g:acp_behaviorKeywordLength = 3
 
-augroup END
 
 """""""""CLAM""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup CLAM
@@ -801,9 +796,7 @@ augroup COC
   " May need for Vim (not Neovim) since coc.nvim calculates byte offset by count
   " utf-8 byte sequence
   set encoding=utf-8
-  " Some servers have issues with backup files, see #649
-  set nobackup
-  set nowritebackup
+
 
   " Having longer updatetime (default is 4000 ms = 4s) leads to noticeable
   " delays and poor user experience
@@ -1092,35 +1085,7 @@ augroup LOGVIEWER
   let g:LogViewer_Filetypes = 'log4j,syslog,log'
 augroup END
 
-"""""""NEOCOMPLCACHE"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-augroup NEOCOMPLCACHE
-  "Enable
-  let g:neocomplcache_enable_at_startup = 1
-  " Use smartcase.
-  let g:neocomplcache_enable_smart_case = 1
-  " Set minimum syntax keyword length.
-  let g:neocomplcache_min_syntax_length = 3
-  let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
-  " Define dictionary.
-  let g:neocomplcache_dictionary_filetype_lists = {
-        \ 'default' : '',
-        \ 'vimshell' : $HOME.'/.vimshell_hist',
-        \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
-
-  " AutoComplPop like behavior.
-  "let g:neocomplcache_enable_auto_select = 1
-
-  " Enable heavy omni completion.
-  if !exists('g:neocomplcache_force_omni_patterns')
-    let g:neocomplcache_force_omni_patterns = {}
-  endif
-  let g:neocomplcache_force_omni_patterns.php = '[^.  \t]->\h\w*\|\h\w*::'
-  let g:neocomplcache_force_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-  let g:neocomplcache_force_omni_patterns.cpp =
-        \'[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-augroup END
 
 """""""NERDTREE""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup NERDTREE
@@ -1182,55 +1147,7 @@ augroup SIGNATURE
   nm <Leader>sr :SignatureRefresh<CR>
 augroup END
 
-"""""""SYNTASTIC"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-augroup SYNTASTIC
-  set statusline+=%#warningmsg#
-  set statusline+=%{SyntasticStatuslineFlag()}
-  set statusline+=%*
 
-  let g:syntastic_always_populate_loc_list = 1
-  let g:syntastic_auto_loc_list = 0
-  let g:syntastic_check_on_open = 0
-  let g:syntastic_check_on_wq = 0
-
-  let g:syntastic_html_tidy_ignore_errors=['proprietary attribute "ng-']
-
-  let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
-  let g:syntastic_php_phpcs_args = "
-        \ --standard=Drupal
-        \ --extensions=drush,php,module,inc,install,test,profile,theme,
-        \js,css,info,txt,md"
-
-  let g:syntastic_gitcommit_checkers = ['proselint']
-  "let g:syntastic_javascript_checkers = ['eslint', 'json_tool', 'standard']
-  let g:syntastic_javascript_checkers = ['standard', 'jsonlint']
-  let g:syntastic_python_checkers = ['pylint']
-  "let g:syntastic_python_pylint_args = '-s n'
-  let g:syntastic_python_python_exec = 'python3'
-  let g:syntastic_sh_checkers = ['shellcheck', 'sh', 'bashate']
-  let g:syntastic_yaml_checkers = ['pyyaml']
-  let g:syntastic_solidity_checkers = ['solhint']
-
-  "More Significant Symbols
-  let g:syntastic_error_symbol = '✗'
-  let g:syntastic_warning_symbol = '!'
-  let g:syntastic_style_error_symbol = '✗§'
-  let g:syntastic_style_warning_symbol = '!§'
-
-  "Error options
-  "let g:syntastic_debug = 3
-  let g:syntastic_exit_checks = 0
-
-  "Toggle off checkers by default.
-  let g:loaded_syntastic_ansible_ansible_lint_checker = 0
-
-  "Scroll through errors with ^ & v
-  nm <silent> <UP> :lprev<CR>
-  nm <silent> <DOWN> :lnext<CR>
-
-  "Toggle display of Syntastic error window
-  nn <silent> <Leader>e :<C-u>call ToggleErrors()<CR>
-augroup END
 
 """""""TAGBAR""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup TAGBAR
@@ -1262,13 +1179,12 @@ augroup VIM-AI
   " open AI chat
   nn <leader><CR> :AIC<CR>
 
+  " complete text on the current line or in visual selection
+  xn <leader><CR> :AI<CR>
+
   " open AI prompt for gen code
   nn <leader><leader><CR> :AI
   xn <leader><leader><CR> :AI
-
-  " complete text on the current line or in visual selection
-  nn <leader><CR> :AI<CR>
-  xn <leader><CR> :AI<CR>
 
   " run AI edit or redo edit
   xn <leader>' :AIE
@@ -1296,16 +1212,6 @@ augroup VIM-AUTOFORMAT
   let g:run_all_formatters_sh = 1
 
   nn <Leader>F :Autoformat<CR>
-augroup END
-
-"""""""VIM-COMPLETE"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-augroup VIM-COMPLETE
-  let g:vimcomplete_tab_enable = 1
-  let g:vimcomplete_cr_enable = 0
-
-  "let g:vimcomplete_options = { 'completor': {'noNewlineInCompletion': v:true, 'noNewlineInCompletionEver': v:true} }
-
-  "autocmd VimEnter * call g:VimCompleteOptionsSet(vimcomplete_options)
 augroup END
 
 """""""VIM-STICKY""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1367,15 +1273,7 @@ augroup HELPER
           \ <Bar>redraw!<Return>
   endif
 
-"""""""""TOGGLE THE DISPLAY OF SYNTASTIC'S ERROR WINDOW""""""""""""""""""""""""
-  function! ToggleErrors()
-    let old_last_winnr = winnr('$')
-    lclose
-    if old_last_winnr == winnr('$')
-      " Nothing was closed, open syntastic error location panel
-      Errors
-    endif
-  endfunction
+
 
 """""""""TOGGLE THE HOME POSITION""""""""""""""""""""""""""""""""""""""""""""""
   "Credits to https://ddrscott.github.io/blog/2016/vim-toggle-movement/

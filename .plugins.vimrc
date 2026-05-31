@@ -52,7 +52,6 @@ augroup PLUGINS
   Plug 'mbbill/undotree'
   Plug 'mtth/scratch.vim'
   Plug 'mxw/vim-jsx'
-  Plug 'myint/syntastic-extras'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'osyo-manga/vim-hopping'
   Plug 'osyo-manga/vim-over'
@@ -61,7 +60,6 @@ augroup PLUGINS
   Plug 'ryanoasis/vim-devicons'
   Plug 'scrooloose/nerdcommenter'
   Plug 'scrooloose/nerdtree'
-  Plug 'scrooloose/syntastic'
   Plug 'shawnconn/vim-colorschemes'
   Plug 'shawncplus/phpcomplete.vim'
   Plug 'shmup/vim-sql-syntax'
