@@ -2,6 +2,11 @@
 ## macos: macOS-env specific functions.
 ##
 
+# cd to Finder dir
+function macos-finder-cd {
+  cd "$(osascript -e 'tell application "Finder" to try' -e 'POSIX path of (target of front Finder window as alias)' -e 'on error' -e 'POSIX path of (desktop as alias)' -e 'end try')"
+}
+
 # Show all defaults
 function macos-show-defaults {
   for i in $(defaults domains | tr ',' '\n'); do
