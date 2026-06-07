@@ -80,7 +80,7 @@ augroup PLUGINS
   Plug 'vim-php/tagbar-phpctags.vim'
   Plug 'vim-scripts/repmo.vim'
   Plug 'wellle/targets.vim'
-  Plug 'wilywampa/vim-easymotion'
+  Plug 'easymotion/vim-easymotion'
   Plug 'yggdroot/indentline'
 augroup END
 """""""PLUGINS""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
