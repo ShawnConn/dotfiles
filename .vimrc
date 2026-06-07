@@ -1000,8 +1000,8 @@ augroup EASYMOTION
   "nmap <Leader>W <Plug>(easymotion-overwin-w)
 
   " replace native vim s (use cl instead)
-  nn s <Plug>(easymotion-s2)
-  vn s <Plug>(easymotion-s2)
+  nn s <Plug>(easymotion-s)
+  vn s <Plug>(easymotion-s)
 
   "Add easymotion search
   map <Leader>m <Plug>(easymotion-sn)
