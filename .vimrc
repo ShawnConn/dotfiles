@@ -283,13 +283,14 @@ augroup COMMANDS
   """"" PHP/Drupal """""
 
   """"" Markdown """""
-  "  :<C-U>call <SID>opfunc(visualmode(),visualmode() ==# 'V' ? 1 : 0)<CR>
-  "  :<C-U>call <SNR>89_opfunc(visualmode(),visualmode() ==# 'V' ? 1 : 0)<CR>
-
-  " <Leader>+b = Wrap bold
-  au FileType markdown vmap <buffer><silent><Leader>b S*vf*S*
+  " <Leader>+b = Wrap bold (ASCII 98 = b)
+  au FileType markdown let b:surround_98 = "**\r**"
+  au FileType markdown vmap <buffer><silent><Leader>b Sb
   " <Leader>+c = Wrap code
   au FileType markdown vmap <buffer><silent><Leader>c S`
+  " <Leader>+C = Wrap code block
+  au FileType markdown let b:surround_99 = "```\n\r\n```"
+  au FileType markdown vmap <buffer><silent><Leader>C Sc
   " <Leader>+e = Wrap example code block
   au FileType markdown vmap <buffer><silent><Leader>e Sci<BS><ESC>
   " <Leader>+p = Wrap picture/image
@@ -299,8 +300,26 @@ augroup COMMANDS
   au FileType markdown vmap <buffer><silent><Leader>i S_
   " <Leader>+l = Wrap clipboard link
   au FileType markdown vmap <buffer><silent><Leader>l S]%a(<C-R>+)<ESC>
-  " <Leader>+s = Wrap strikethrough
-  au FileType markdown vmap <buffer><silent><Leader>s S~vf~S~
+  " <Leader>+s = Wrap strikethrough (ASCII 115 = s)
+  au FileType markdown let b:surround_115 = "~~\r~~"
+  au FileType markdown vmap <buffer><silent><Leader>s Ss
+  " <Leader>+q = Blockquote (Prepends '> ' to selected lines)
+  au FileType markdown vnoremap <buffer><silent><Leader>q :s/^/> /<CR>:noh<CR>
+  " <Leader>+u = Unordered List (Prepends '- ' to selected lines)
+  au FileType markdown vnoremap <buffer><silent><Leader>u :s/^/- /<CR>:noh<CR>
+  " <Leader>+o = Ordered List (Prepends '1. ' to selected lines. Markdown auto-numbers on render!)
+  au FileType markdown vnoremap <buffer><silent><Leader>o :s/^/1. /<CR>:noh<CR>
+  " <Leader>+t = Task List (Prepends '- [ ] ' to selected lines)
+  au FileType markdown vnoremap <buffer><silent><Leader>t :s/^/- [ ] /<CR>:noh<CR>
+  " <Leader>+x = Toggle task checkbox [ ] <-> [x]
+  au FileType markdown nnoremap <buffer><silent><Leader>x :s/\[\([ x]\)\]/\=submatch(1) == ' ' ? '[x]' : '[ ]'/e<CR>:noh<CR>
+  " <Leader>+h = Increase Header level
+  au FileType markdown nnoremap <buffer><silent><Leader>h :s/^\(#*\)\( \?\)/\1# /<CR>:noh<CR>
+  " <Leader>+r = Insert Horizontal Rule below current line
+  au FileType markdown nnoremap <buffer><silent><Leader>r o<CR>---<CR><CR><ESC>
+  " <Leader>+d = Wrap in HTML <details> block (ASCII 100 = d)
+  au FileType markdown let b:surround_100 = "<details>\n<summary>Details</summary>\n\n\r\n</details>"
+  au FileType markdown vmap <buffer><silent><Leader>d Sd
   """"" Markdown """""
 augroup END
 
