@@ -284,42 +284,42 @@ augroup COMMANDS
 
   """"" Markdown """""
   " <Leader>+b = Wrap bold (ASCII 98 = b)
-  au FileType markdown let b:surround_98 = "**\r**"
-  au FileType markdown vmap <buffer><silent><Leader>b Sb
-  " <Leader>+c = Wrap code
-  au FileType markdown vmap <buffer><silent><Leader>c S`
-  " <Leader>+C = Wrap code block
-  au FileType markdown let b:surround_99 = "```\n\r\n```"
-  au FileType markdown vmap <buffer><silent><Leader>C Sc
-  " <Leader>+e = Wrap example code block
-  au FileType markdown vmap <buffer><silent><Leader>e Sci<BS><ESC>
-  " <Leader>+p = Wrap picture/image
-  au FileType markdown vmap
-      \ <buffer><silent><Leader>p S]%a(<C-R>+ "TITLE")<ESC><TAB>h<TAB>i!<ESC>
-  " <Leader>+i = Wrap italic
-  au FileType markdown vmap <buffer><silent><Leader>i S_
-  " <Leader>+l = Wrap clipboard link
-  au FileType markdown vmap <buffer><silent><Leader>l S]%a(<C-R>+)<ESC>
-  " <Leader>+s = Wrap strikethrough (ASCII 115 = s)
-  au FileType markdown let b:surround_115 = "~~\r~~"
-  au FileType markdown vmap <buffer><silent><Leader>s Ss
-  " <Leader>+q = Blockquote (Prepends '> ' to selected lines)
-  au FileType markdown vnoremap <buffer><silent><Leader>q :s/^/> /<CR>:noh<CR>
-  " <Leader>+u = Unordered List (Prepends '- ' to selected lines)
-  au FileType markdown vnoremap <buffer><silent><Leader>u :s/^/- /<CR>:noh<CR>
-  " <Leader>+o = Ordered List (Prepends '1. ' to selected lines. Markdown auto-numbers on render!)
-  au FileType markdown vnoremap <buffer><silent><Leader>o :s/^/1. /<CR>:noh<CR>
-  " <Leader>+t = Task List (Prepends '- [ ] ' to selected lines)
-  au FileType markdown vnoremap <buffer><silent><Leader>t :s/^/- [ ] /<CR>:noh<CR>
-  " <Leader>+x = Toggle task checkbox [ ] <-> [x]
-  au FileType markdown nnoremap <buffer><silent><Leader>x :s/\[\([ x]\)\]/\=submatch(1) == ' ' ? '[x]' : '[ ]'/e<CR>:noh<CR>
-  " <Leader>+h = Increase Header level
-  au FileType markdown nnoremap <buffer><silent><Leader>h :s/^\(#*\)\( \?\)/\1# /<CR>:noh<CR>
-  " <Leader>+r = Insert Horizontal Rule below current line
-  au FileType markdown nnoremap <buffer><silent><Leader>r o<CR>---<CR><CR><ESC>
-  " <Leader>+d = Wrap in HTML <details> block (ASCII 100 = d)
-  au FileType markdown let b:surround_100 = "<details>\n<summary>Details</summary>\n\n\r\n</details>"
-  au FileType markdown vmap <buffer><silent><Leader>d Sd
+  au FileType markdown,text let b:surround_98 = "**\r**"
+  au FileType markdown,text vmap <buffer><silent><Leader>b Sb
+  " <Leader>+c = Wrap ,textcode
+  au FileType markdown,text vmap <buffer><silent><Leader>c S`
+  " <Leader>+C = Wrap ,textcode block
+  au FileType markdown,text let b:surround_99 = "```\n\r\n```"
+  au FileType markdown,text vmap <buffer><silent><Leader>C Sc
+  " <Leader>+e = Wrap ,textexample code block
+  au FileType markdown,text vmap <buffer><silent><Leader>e Sci<BS><ESC>
+  " <Leader>+p = Wrap ,textpicture/image
+  au FileType markdown,text vmap
+      \ <buffer><silen,textt><Leader>p S]%a(<C-R>+ "TITLE")<ESC><TAB>h<TAB>i!<ESC>
+  " <Leader>+i = Wrap ,textitalic
+  au FileType markdown,text vmap <buffer><silent><Leader>i S_
+  " <Leader>+l = Wrap ,textclipboard link
+  au FileType markdown,text vmap <buffer><silent><Leader>l S]%a(<C-R>+)<ESC>
+  " <Leader>+s = Wrap ,textstrikethrough (ASCII 115 = s)
+  au FileType markdown,text let b:surround_115 = "~~\r~~"
+  au FileType markdown,text vmap <buffer><silent><Leader>s Ss
+  " <Leader>+q = Block,textquote (Prepends '> ' to selected lines)
+  au FileType markdown,text vnoremap <buffer><silent><Leader>q :s/^/> /<CR>:noh<CR>
+  " <Leader>+u = Unord,textered List (Prepends '- ' to selected lines)
+  au FileType markdown,text vnoremap <buffer><silent><Leader>u :s/^/- /<CR>:noh<CR>
+  " <Leader>+o = Order,texted List (Prepends '1. ' to selected lines. Markdown auto-numbers on render!)
+  au FileType markdown,text vnoremap <buffer><silent><Leader>o :s/^/1. /<CR>:noh<CR>
+  " <Leader>+t = Task ,textList (Prepends '- [ ] ' to selected lines)
+  au FileType markdown,text vnoremap <buffer><silent><Leader>t :s/^/- [ ] /<CR>:noh<CR>
+  " <Leader>+x = Toggl,texte task checkbox [ ] <-> [x]
+  au FileType markdown,text nnoremap <buffer><silent><Leader>x :s/\[\([ x]\)\]/\=submatch(1) == ' ' ? '[x]' : '[ ]'/e<CR>:noh<CR>
+  " <Leader>+h = Incre,textase Header level
+  au FileType markdown,text nnoremap <buffer><silent><Leader>h :s/^\(#*\)\( \?\)/\1# /<CR>:noh<CR>
+  " <Leader>+r = Inser,textt Horizontal Rule below current line
+  au FileType markdown,text nnoremap <buffer><silent><Leader>r o<CR>---<CR><CR><ESC>
+  " <Leader>+d = Wrap ,textin HTML <details> block (ASCII 100 = d)
+  au FileType markdown,text let b:surround_100 = "<details>\n<summary>Details</summary>\n\n\r\n</details>"
+  au FileType markdown,text vmap <buffer><silent><Leader>d Sd
   """"" Markdown """""
 augroup END
 
@@ -992,6 +992,17 @@ augroup END
 
 """""""EASYMOTION""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup EASYMOTION
+  " search with <Leader>+f
+  nn <Leader>f <Plug>(easymotion-overwin-f)
+  nn <Leader><Leader>f <Plug>(easymotion-overwin-f2)
+  vn <Leader><Leader>f <Plug>(easymotion-overwin-f2)
+
+  "nmap <Leader>W <Plug>(easymotion-overwin-w)
+
+  " replace native vim s (use cl instead)
+  nn s <Plug>(easymotion-s2)
+  vn s <Plug>(easymotion-s2)
+
   "Add easymotion search
   map <Leader>m <Plug>(easymotion-sn)
   map <Leader>n <Plug>(easymotion-next)
@@ -999,23 +1010,17 @@ augroup EASYMOTION
 
   "Add 2x leader easymotion directions
   map <Leader><Leader>l <Plug>(easymotion-lineforward)
-  map <Leader><Leader>j <Plug>(easymotion-j)
-  map <Leader><Leader>k <Plug>(easymotion-k)
+  map <Leader><Leader>j <Plug>(easymotion-bd-jk)
   map <Leader><Leader>h <Plug>(easymotion-linebackward)
+  map <Leader><Leader>w <Plug>(easymotion-bd-w)
 
   "Repeat last motion
   map <Leader><Leader>s <Plug>(easymotion-repeat)
 
-  " Require tpope/vim-repeat to enable dot repeat support
-  " Jump to anywhere with only `s{char}{target}`
-  " `s<CR>` repeat last find motion.
-  nm <Leader>f <Plug>(easymotion-s)
-  nm <Leader><Leader>f <Plug>(easymotion-s2)
-
   "keep cursor column when JK motion
   let g:EasyMotion_startofline = 0
   " Use uppercase target labels and type as a lower case
-  let g:EasyMotion_use_upper = 1
+  "let g:EasyMotion_use_upper = 1
   " type `l` and match `l`&`L`
   let g:EasyMotion_smartcase = 1
   " Smartsign (type `3` and match `3`&`#`)
