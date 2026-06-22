@@ -15,6 +15,7 @@ augroup END
 
 """""""DEBUGGING"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup DEBUGGING
+  au!
 
   " Use :call ToggleVerbose() to dump a verbose log
   function! ToggleVerbose()
@@ -31,6 +32,7 @@ augroup END
 
 """""""USEFUL COMMANDS"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup USEFUL COMMANDS
+  au!
   "  __           :  _____________________________________.
   "  ``           :  Return to previous cursor before jump.
   "  gi           :  Last Place in Insert Mode.
@@ -39,6 +41,7 @@ augroup END
 
 """""""NEOVIM""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup NEOVIM
+  au!
   "CONFIGURE FOR NEOVIM
   if has('nvim')
   endif
@@ -50,16 +53,17 @@ augroup END
 
 """""""AUTOCOMPLETE""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup AUTOCOMPLETE
+  au!
   "j/k to navigate
   "autocomplete menu
-  ino <expr> J ((pumvisible())?("\<C-n>"):("J"))
-  ino <expr> K ((pumvisible())?("\<C-p>"):("K"))
+  inoremap <expr> J ((pumvisible())?("\<C-n>"):("J"))
+  inoremap <expr> K ((pumvisible())?("\<C-p>"):("K"))
 
   "Dictionary complete with Tab+d
-  ino <Tab>d <C-X><C-k>
+  inoremap <Tab>d <C-X><C-k>
 
   "Line complete with Tab+l
-  ino <Tab>l <C-x><C-l>
+  inoremap <Tab>l <C-x><C-l>
 
   "Autocomplete from dictionary as well
   set complete+=k
@@ -74,191 +78,192 @@ augroup END
 
 """""""COMMANDS"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup COMMANDS
+  au!
   "Set leader to Space
   let mapleader = "\<Space>"
   let g:mapleader = "\<Space>"
   let g:maplocalleader = "\\"
 
   "Double tap local leader for prev buffer
-  no <Localleader><Localleader> <c-^>
+  noremap <Localleader><Localleader> <c-^>
 
   "Map g+j/k to move down to the first no blank character
-  no gj +
-  no gk -
+  noremap gj +
+  noremap gk -
 
   "Map g+J/K to move down to the first empty line
-  no gJ }
-  no gK {
+  noremap gJ }
+  noremap gK {
 
   "Map jk for escaping insert/visual/comman mode
-  ino jk <Esc>
-  ino kj <Esc>
-  cno jk <C-c>
+  inoremap jk <Esc>
+  inoremap kj <Esc>
+  cnoremap jk <C-c>
 
   " Move visual block
-  vn J :m '>+1<CR>gv=gv
-  vn K :m '<-2<CR>gv=gv
+  vnoremap J :m '>+1<CR>gv=gv
+  vnoremap K :m '<-2<CR>gv=gv
 
   "Yank visual mode w/ return
-  vn <CR> y
+  vnoremap <CR> y
 
   "Remap 0 to toggle home position
-  nn 0 :call ToggleHomeZero()<CR>
+  nnoremap 0 :call ToggleHomeZero()<CR>
 
   "Fast saving/quiting
-  nm <Leader>w :w!<CR>
-  nm <Leader>Q :qa!<CR>
-  nm <Leader>q :q<CR>
+  nmap <Leader>w :w!<CR>
+  nmap <Leader>Q :qa!<CR>
+  nmap <Leader>q :q<CR>
 
   "No typos on force quit
-  cno Q q
+  cnoremap Q q
 
   "Disable EX-cmd
-  no Q <nop>
+  noremap Q <nop>
 
   "Adjust EX-mode;;
-  nn <Leader>' Q
+  nnoremap <Leader>' Q
 
   "Smart way to move between windows
-  nn <silent> <Leader>j <C-W>j
-  nn <silent> <Leader>k <C-W>k
-  nn <silent> <Leader>h <C-W>h
-  nn <silent> <Leader>l <C-W>l
+  nnoremap <silent> <Leader>j <C-W>j
+  nnoremap <silent> <Leader>k <C-W>k
+  nnoremap <silent> <Leader>h <C-W>h
+  nnoremap <silent> <Leader>l <C-W>l
 
   "When you press <Leader>r you can search and replace the selected text
-  vn <leader>r y:<C-u>%s/<C-R>"//gc<left><left><left>
+  vnoremap <leader>r y:<C-u>%s/<C-R>"//gc<left><left><left>
 
   "Leader+r to do interactive find/replace regex
-  nm <Leader>r :OverCommandLine <CR> %s/
+  nmap <Leader>r :OverCommandLine <CR> %s/
 
   "Toggle white space display
-  nm <Leader>ss :set list!<CR>
+  nmap <Leader>ss :set list!<CR>
   set lcs=tab:▶\ ,eol:¬,extends:>,precedes:<
   let &showbreak='↪ '
 
   "Navigate Buffers with Space+(,|.)
-  nn <Leader>, :bp<CR>
-  nn <Leader>. :bn<CR>
-  nn <Leader>b1 :b 1<CR>
-  nn <Leader>b2 :b 2<CR>
-  nn <Leader>b3 :b 3<CR>
-  nn <Leader>b4 :b 4<CR>
-  nn <Leader>b5 :b 5<CR>
-  nn <Leader>b6 :b 6<CR>
-  nn <Leader>b7 :b 7<CR>
-  nn <Leader>b8 :b 8<CR>
-  nn <Leader>b9 :b 9<CR>
-  nn <Leader>b0 :bl<CR>
+  nnoremap <Leader>, :bp<CR>
+  nnoremap <Leader>. :bn<CR>
+  nnoremap <Leader>b1 :b 1<CR>
+  nnoremap <Leader>b2 :b 2<CR>
+  nnoremap <Leader>b3 :b 3<CR>
+  nnoremap <Leader>b4 :b 4<CR>
+  nnoremap <Leader>b5 :b 5<CR>
+  nnoremap <Leader>b6 :b 6<CR>
+  nnoremap <Leader>b7 :b 7<CR>
+  nnoremap <Leader>b8 :b 8<CR>
+  nnoremap <Leader>b9 :b 9<CR>
+  nnoremap <Leader>b0 :bl<CR>
 
   "Navigate Tabs with Space+t,(<|>)
-  nn <Leader>< :tabp<CR>
-  nn <Leader>> :tabn<CR>
-  nn <Leader>t1 :tabn 1<CR>
-  nn <Leader>t2 :tabn 2<CR>
-  nn <Leader>t3 :tabn 3<CR>
-  nn <Leader>t4 :tabn 4<CR>
-  nn <Leader>t5 :tabn 5<CR>
-  nn <Leader>t6 :tabn 6<CR>
-  nn <Leader>t7 :tabn 7<CR>
-  nn <Leader>t8 :tabn 8<CR>
-  nn <Leader>t9 :tabn 9<CR>
-  nn <Leader>t0 :tabl<CR>
+  nnoremap <Leader>< :tabp<CR>
+  nnoremap <Leader>> :tabn<CR>
+  nnoremap <Leader>t1 :tabn 1<CR>
+  nnoremap <Leader>t2 :tabn 2<CR>
+  nnoremap <Leader>t3 :tabn 3<CR>
+  nnoremap <Leader>t4 :tabn 4<CR>
+  nnoremap <Leader>t5 :tabn 5<CR>
+  nnoremap <Leader>t6 :tabn 6<CR>
+  nnoremap <Leader>t7 :tabn 7<CR>
+  nnoremap <Leader>t8 :tabn 8<CR>
+  nnoremap <Leader>t9 :tabn 9<CR>
+  nnoremap <Leader>t0 :tabl<CR>
 
   " Delete marker
-  nn <Leader>d' :delm
+  nnoremap <Leader>d' :delm
 
   "Buffer quit
-  nn <Leader>bq :bp<Bar>sp<Bar>bn<Bar>bd<CR>
-  nn <Leader>bc :%bd<CR>
+  nnoremap <Leader>bq :bp<Bar>sp<Bar>bn<Bar>bd<CR>
+  nnoremap <Leader>bc :%bd<CR>
 
   "Split quit
-  nn <Leader>sq <C-w>q
+  nnoremap <Leader>sq <C-w>q
 
   "Tab quit
-  nn <Leader>tq :tabclose<CR>
+  nnoremap <Leader>tq :tabclose<CR>
 
   "Pressing <Leader>sp will toggle and un-toggle spell checking
-  nn <Leader>sp :setlocal spell!<CR>
+  nnoremap <Leader>sp :setlocal spell!<CR>
 
   "Use paste mode with yo, yO, yi, yI, ya, yA
-  nn <Leader>yp :set paste!<CR>
-  nn <silent>yo  :set paste<CR>o
-  nn <silent>yO  :set paste<CR>O
-  nn <silent>yi  :set paste<CR>i
-  nn <silent>yI  :set paste<CR>I
-  nn <silent>ya  :set paste<CR>a
-  nn <silent>yA  :set paste<CR>A
+  nnoremap <Leader>yp :set paste!<CR>
+  nnoremap <silent>yo  :set paste<CR>o
+  nnoremap <silent>yO  :set paste<CR>O
+  nnoremap <silent>yi  :set paste<CR>i
+  nnoremap <silent>yI  :set paste<CR>I
+  nnoremap <silent>ya  :set paste<CR>a
+  nnoremap <silent>yA  :set paste<CR>A
 
   " P or <Leader>p will keep register contents
-  vn P "_dP
-  vn <Leader>p "_dP
+  vnoremap P "_dP
+  vnoremap <Leader>p "_dP
 
   "Tab will jump to matched char
-  nn <Tab> %
-  vn <Tab> %
+  nnoremap <Tab> %
+  vnoremap <Tab> %
   map <Tab> %
 
   "Move <C-h>/<C-l> start/end for insert/commands
-  ino <C-h> <ESC>I
-  ino <C-l> <ESC>A
-  cno <C-h> <HOME>
-  cno <C-l> <END>
-  cno <C-j> <S-Left>
-  cno <C-k> <S-Right>
+  inoremap <C-h> <ESC>I
+  inoremap <C-l> <ESC>A
+  cnoremap <C-h> <HOME>
+  cnoremap <C-l> <END>
+  cnoremap <C-j> <S-Left>
+  cnoremap <C-k> <S-Right>
 
   "~ is operator like
   set tildeop
 
   "map diff next/prev to dn/dN
-  nn dn ]c
-  nn dN [c
+  nnoremap dn ]c
+  nnoremap dN [c
 
   "Use dy to be consistent with y/p
-  nn dy do
+  nnoremap dy do
 
   "Skip folds with { & }
-  nn <expr> } foldclosed(search('^$', 'Wn')) == -1 ? "}" : "}j}"
-  nn <expr> { foldclosed(search('^$', 'Wnb')) == -1 ? "{" : "{k{"
+  nnoremap <expr> } foldclosed(search('^$', 'Wn')) == -1 ? "}" : "}j}"
+  nnoremap <expr> { foldclosed(search('^$', 'Wnb')) == -1 ? "{" : "{k{"
   " IGNORE: FIX FOR .vimrc SynHighlight: }
 
   "ENTER to get a command out
   map <Leader><CR> :
 
   " Source For Testing VimScript
-  vn <Leader>S y:execute @@<CR>:echo 'Sourced selection.'<CR>
-  nn <Leader>S ^vg_y:execute @@<CR>:echo 'Sourced line.'<CR> "
+  vnoremap <Leader>S y:execute @@<CR>:echo 'Sourced selection.'<CR>
+  nnoremap <Leader>S ^vg_y:execute @@<CR>:echo 'Sourced line.'<CR> "
 
   "write in case didn't sudo
-  cno w!! w !sudo tee % >/dev/null
+  cnoremap w!! w !sudo tee % >/dev/null
 
   "Automatically source vimrc on save.
   au! bufwritepost $MYVIMRC source $MYVIMRC
 
   "Select just pasted text
-  no gV `[v`]
+  noremap gV `[v`]
 
   "Move text to left/right/center
-  nn <Leader>.l :left<CR>
-  vn <Leader>.l :left<CR>
-  nn <Leader>.c :center<CR>
-  vn <Leader>.c :center<CR>
-  nn <Leader>.r :right<CR>
-  vn <Leader>.r :right<CR>
+  nnoremap <Leader>.l :left<CR>
+  vnoremap <Leader>.l :left<CR>
+  nnoremap <Leader>.c :center<CR>
+  vnoremap <Leader>.c :center<CR>
+  nnoremap <Leader>.r :right<CR>
+  vnoremap <Leader>.r :right<CR>
 
   "Select indented line
-  nn vv ^vg_
+  nnoremap vv ^vg_
 
   "Visual Block with <Leader>+vb
-  no <Leader>vb <C-v>
+  noremap <Leader>vb <C-v>
 
   "Horizontal split w/ C-w,h
-  nn <C-w>h :split<CR>
+  nnoremap <C-w>h :split<CR>
   "Vertical split w/ C-w,v
-  nn <C-w>v :vsplit<CR>
+  nnoremap <C-w>v :vsplit<CR>
 
   """"" Shell """""
   "Quick var ref
-  au FileType bash,sh,zsh ino vv $
+  au FileType bash,sh,zsh inoremap vv $
   """"" Shell """""
 
   """"" PHP/Drupal """""
@@ -279,7 +284,7 @@ augroup COMMANDS
         \install,test,profile,theme ino vd var_dump
 
   "Quick end statement
-  nn <Leader>; A;<ESC>
+  nnoremap <Leader>; A;<ESC>
   """"" PHP/Drupal """""
 
   """"" Markdown """""
@@ -325,13 +330,12 @@ augroup END
 
 """""""""FORMATTING""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup FORMATTING
+  au!
   "Cursor Position
   set ruler
 
   "Automatically remove trailing whitespace for certain files
-  au FileType c,cpp,css,drush,inc,install,
-        \html,java,js,module,php,pl,rb,sh,theme,test
-        \ au BufWritePre <buffer> :%s/\s\+$//e
+  au BufWritePre *.c,*.cpp,*.css,*.drush,*.inc,*.install,*.html,*.java,*.js,*.module,*.php,*.pl,*.rb,*.sh,*.theme,*.test :%s/\s\+$//e
 
   "Set status line with file info
   set statusline=\ %{HasPaste()}%F%m%r%h%w
@@ -365,11 +369,11 @@ augroup FORMATTING
 
   "Set line numbers
   set number
-  nm <F2> :set number! number?<CR>
+  nmap <F2> :set number! number?<CR>
   set autoindent
 
   "Toggle relative line numbering
-  nm <Leader><Leader>n :set invrelativenumber!<CR>
+  nmap <Leader><Leader>n :set invrelativenumber!<CR>
   "set invrelativenumber
 
   "Tab = 2 spaces
@@ -383,7 +387,7 @@ augroup FORMATTING
   set smartindent
 
   "Bracket formatting for new bloc
-  ino {<CR> {<CR>}<ESC>O
+  inoremap {<CR> {<CR>}<ESC>O
   " FIX FOR SynHighlight: }
 
   "Round indentation to soft tab
@@ -416,24 +420,26 @@ augroup END
 
 """""""""FUGITIVE""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup FUGITIVE
+  au!
   function! GBrowseLine()
     exe ':'.line('.').'GBrowse'
   endfunction
 
-  no <Leader>gs :Git<CR>
-  no <Leader>gd :Gdiffsplit<CR>
-  no <Leader>gda :Git difftool -y<CR>
-  no <Leader>gc :Git commit<CR>
-  no <Leader>gb :Git blame<CR>
-  no <Leader>gh :Gclog<CR>
-  no <Leader>gl :Git log<CR>
-  no <Leader>gm :Git mergetool -y<CR>
-  no <Leader>gp :Git push<CR>
-  no <Leader>gv :call GBrowseLine()<CR>
+  noremap <Leader>gs :Git<CR>
+  noremap <Leader>gd :Gdiffsplit<CR>
+  noremap <Leader>gda :Git difftool -y<CR>
+  noremap <Leader>gc :Git commit<CR>
+  noremap <Leader>gb :Git blame<CR>
+  noremap <Leader>gh :Gclog<CR>
+  noremap <Leader>gl :Git log<CR>
+  noremap <Leader>gm :Git mergetool -y<CR>
+  noremap <Leader>gp :Git push<CR>
+  noremap <Leader>gv :call GBrowseLine()<CR>
 augroup END
 
 """""""""HIGHLIGHTING""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup HIGHLIGHTING
+  au!
   "File Type
   filetype plugin on
 
@@ -446,15 +452,15 @@ augroup HIGHLIGHTING
   let php_htmlInStrings = 1
 
   "Keep selection highlighted through indentation shifting
-  vm < <gv
-  vm > >gv
+  vmap < <gv
+  vmap > >gv
 
   "Change highlight
-  nm <Leader>ch :set cursorcolumn!<CR>:set cursorline!<CR>
+  nmap <Leader>ch :set cursorcolumn!<CR>:set cursorline!<CR>
 
   "Highlight redundant whitespaces and tabs.
   highlight RedundantSpaces ctermbg=red guibg=red
-  match RedundantSpaces /\s\+$\| \+\ze\t\|\t/
+  au WinEnter,VimEnter * match RedundantSpaces /\s\+$\| \+\ze\t\|\t/
 
   "Incremental search/nopaste/comment block
   set comments=sr:/*,mb:*,ex:*/
@@ -526,19 +532,20 @@ augroup HIGHLIGHTING
   au BufNewFile,BufRead *.sh set foldenable
 
   "This fold is the one true king
-  nn <Leader>zc zMzvzz
+  nnoremap <Leader>zc zMzvzz
 
   "Turn off folding
-  nn <Leader>zz :set nofoldenable!<CR>
+  nnoremap <Leader>zz :set nofoldenable!<CR>
 
   "Set PHP function folding
-  nn <Leader>zp :EnablePHPFolds<CR>zM
-  nn <Leader>zf :EnableFastPHPFolds<CR>zM
+  nnoremap <Leader>zp :EnablePHPFolds<CR>zM
+  nnoremap <Leader>zf :EnableFastPHPFolds<CR>zM
 
 augroup END
 
 """"""""""BINARY"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup BINARY
+  au!
   "Editing .bin files
   au!
   au BufReadPre  *.bin let &bin=1
@@ -552,6 +559,7 @@ augroup END
 
 """""""""MAC VIM"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup MAC VIM
+  au!
   "Set Nerd Fonts
   if has("gui_running")
     set guioptions=egmrt
@@ -568,6 +576,7 @@ augroup END
 
 """""""""POSITION""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup POSITION
+  au!
   "When editing a file, always jump to the last cursor position
   au BufReadPost *
         \ if ! exists("g:leave_my_cursor_position_alone") |
@@ -586,22 +595,22 @@ augroup POSITION
   set scrolloff=5
 
   " Keep search matches in the middle of the window.
-  nn n nzz
-  nn N Nzz
+  nnoremap n nzz
+  nnoremap N Nzz
 
   " Same when jumping around
-  nn g; g;zz
-  nn g, g,zz
-  nn <C-o> <C-o>zz
+  nnoremap g; g;zz
+  nnoremap g, g,zz
+  nnoremap <C-o> <C-o>zz
 
   " Use H/L to get to BOL/EOL
-  no H ^
-  no L $
-  vn L g_
+  noremap H ^
+  noremap L $
+  vnoremap L g_
 
   " Use <Leader> H/L to jump top/bottom
-  no <Leader>H H
-  no <Leader>L L
+  noremap <Leader>H H
+  noremap <Leader>L L
 
   "Add <> as matching pairs
   set matchpairs+=<:>
@@ -609,19 +618,21 @@ augroup END
 
 """""""""QUICK EDITS"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup QUICK EDITS
-  nn <Leader>ev :vsplit $MYVIMRC<CR>
-  nn <Leader>eb :vsplit ~/.bash_profile<CR>
-  nn <Leader>eg :vsplit ~/.gitconfig<CR>
-  nn <Leader>eh :vsplit /etc/hosts<CR>
-  nn <Leader>es :vsplit ~/.ssh/config<CR>
-  nn <Leader>ez :vsplit ~/.zshrc<CR>
-  nn <Leader>ep :vsplit ~/.plugins.vimrc<CR>
-  nn <Leader>ec :vsplit ~/.vim/coc-settings.json<CR>
-  nn <Leader>eai :AIUtilRolesOpen<CR>
+  au!
+  nnoremap <Leader>ev :vsplit $MYVIMRC<CR>
+  nnoremap <Leader>eb :vsplit ~/.bash_profile<CR>
+  nnoremap <Leader>eg :vsplit ~/.gitconfig<CR>
+  nnoremap <Leader>eh :vsplit /etc/hosts<CR>
+  nnoremap <Leader>es :vsplit ~/.ssh/config<CR>
+  nnoremap <Leader>ez :vsplit ~/.zshrc<CR>
+  nnoremap <Leader>ep :vsplit ~/.plugins.vimrc<CR>
+  nnoremap <Leader>ec :vsplit ~/.vim/coc-settings.json<CR>
+  nnoremap <Leader>eai :AIUtilRolesOpen<CR>
 augroup END
 
 """""""""SEARCH""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup SEARCH
+  au!
   "Ignore certain files
   set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
   set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
@@ -639,22 +650,22 @@ augroup SEARCH
   set incsearch
 
   "Remove vim escaped regex chars
-  nn / /\v\c
-  vn / /\v\c
+  nnoremap / /\v\c
+  vnoremap / /\v\c
 
   " Visual mode pressing * or # searches for the current selection
-  vn <silent> * y:/<C-R>"<CR>
-  vn <silent> # y:?<C-R>"<CR>
+  vnoremap <silent> * y:/<C-R>"<CR>
+  vnoremap <silent> # y:?<C-R>"<CR>
 
   "Leader+ESC will toggle off search highlighting
-  nn <Leader><ESC> :nohlsearch<CR>
+  nnoremap <Leader><ESC> :nohlsearch<CR>
 
   "Search from highlight mode
-  vn * :<C-u>call <SID>VSetSearch()<CR>//<CR><C-o>
-  vn # :<C-u>call <SID>VSetSearch()<CR>??<CR><C-o>
+  vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR><C-o>
+  vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR><C-o>
 
   "Search directory for instances of the current word
-  no <Leader>#
+  noremap <Leader>#
         \ :execute "grep -r '" . expand("<cword>") . "' . " <Bar> cw<CR><CR>
 
   "Use Silver Searcher instead of grep
@@ -668,6 +679,7 @@ augroup END
 
 """""""""SETTINGS""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup SETTINGS
+  au!
 
   "Set Backup Dir
   set backupdir =~/.vim/backup//
@@ -710,16 +722,18 @@ augroup END
 
 """""""""TABULARIZE""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup TABULARIZE
+  au!
   " https://devhints.io/tabular
-  no <Leader>t= :Tabularize /=
-  no <Leader>t: :Tabularize /:
-  no <Leader>t:: :Tabularize /:\zs
-  no <Leader>t, :Tabularize /,
-  no <Leader>t<Bar> :Tabularize /
+  noremap <Leader>t= :Tabularize /=
+  noremap <Leader>t: :Tabularize /:
+  noremap <Leader>t:: :Tabularize /:\zs
+  noremap <Leader>t, :Tabularize /,
+  noremap <Leader>t<Bar> :Tabularize /
 augroup END
 
 """""""""TEMPLATES"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup TEMPLATES
+  au!
 
   "For new files load a template
   au BufNewFile *.html 0r ~/.vim/templates/_.html
@@ -743,6 +757,7 @@ augroup END
 
 """""""""AIRLINE"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup AIRLINE
+  au!
   "Prettify
   let g:airline_powerline_fonts = 1
   let g:airline_theme='dark'
@@ -785,15 +800,15 @@ augroup AIRLINE
 
   "Add Buffer Index
   let g:airline#extensions#tabline#buffer_idx_mode = 1
-  nm <leader>1 <Plug>AirlineSelectTab1
-  nm <leader>2 <Plug>AirlineSelectTab2
-  nm <leader>3 <Plug>AirlineSelectTab3
-  nm <leader>4 <Plug>AirlineSelectTab4
-  nm <leader>5 <Plug>AirlineSelectTab5
-  nm <leader>6 <Plug>AirlineSelectTab6
-  nm <leader>7 <Plug>AirlineSelectTab7
-  nm <leader>8 <Plug>AirlineSelectTab8
-  nm <leader>9 <Plug>AirlineSelectTab9
+  nmap <leader>1 <Plug>AirlineSelectTab1
+  nmap <leader>2 <Plug>AirlineSelectTab2
+  nmap <leader>3 <Plug>AirlineSelectTab3
+  nmap <leader>4 <Plug>AirlineSelectTab4
+  nmap <leader>5 <Plug>AirlineSelectTab5
+  nmap <leader>6 <Plug>AirlineSelectTab6
+  nmap <leader>7 <Plug>AirlineSelectTab7
+  nmap <leader>8 <Plug>AirlineSelectTab8
+  nmap <leader>9 <Plug>AirlineSelectTab9
 
   "Short buffer stats +HEX
   let g:airline_section_z = '%3p%% %l:%c|0x%B'
@@ -803,13 +818,15 @@ augroup END
 
 """""""""CLAM""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup CLAM
+  au!
   "Bang your way to shell
-  nn ! :Clam<space>
-  vn ! :ClamVisual<space>
+  nnoremap ! :Clam<space>
+  vnoremap ! :ClamVisual<space>
 augroup END
 
 """""""""COC"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup COC
+  au!
   " Ex: https://raw.githubusercontent.com/neoclide/coc.nvim/master/doc/coc-example-config.vim
 
   " May need for Vim (not Neovim) since coc.nvim calculates byte offset by count
@@ -830,22 +847,22 @@ augroup COC
   " no select by `"suggest.noselect": true` in your configuration file
   " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
   " other plugin before putting this into your config
-  ino <silent><expr> <TAB>
+  inoremap <silent><expr> <TAB>
         \ coc#pum#visible() ? coc#pum#next(1) :
         \ CheckBackspace() ? "\<Tab>" :
         \ coc#refresh()
-  ino <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+  inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
   " Make <CR> to accept selected completion item or notify coc.nvim to format
   " <C-g>u breaks current undo, please make your own choice
-  ino <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+  inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                                 \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
   " Use <c-space> to trigger completion
   if has('nvim')
-    ino <silent><expr> <c-space> coc#refresh()
+    inoremap <silent><expr> <c-space> coc#refresh()
   else
-    ino <silent><expr> <c-space> coc#refresh()
+    inoremap <silent><expr> <c-space> coc#refresh()
   endif
 
   " Use `[g` and `]g` to navigate diagnostics
@@ -977,11 +994,12 @@ augroup COC
      \ ]
 
   " Generate Markdown Preview
-  nm <Leader>mdp :CocCommand markdown-preview-enhanced.openPreview<CR>
+  nmap <Leader>mdp :CocCommand markdown-preview-enhanced.openPreview<CR>
 augroup END
 
 """""""DOGE""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup DOGE
+  au!
   let g:doge_php_settings = {
         \  'resolve_fqn': 1
         \}
@@ -992,16 +1010,17 @@ augroup END
 
 """""""EASYMOTION""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup EASYMOTION
+  au!
   " search with <Leader>+f
-  nn <Leader>f <Plug>(easymotion-overwin-f)
-  nn <Leader><Leader>f <Plug>(easymotion-overwin-f2)
-  vn <Leader><Leader>f <Plug>(easymotion-overwin-f2)
+  nnoremap <Leader>f <Plug>(easymotion-overwin-f)
+  nnoremap <Leader><Leader>f <Plug>(easymotion-overwin-f2)
+  vnoremap <Leader><Leader>f <Plug>(easymotion-overwin-f2)
 
   "nmap <Leader>W <Plug>(easymotion-overwin-w)
 
   " replace native vim s (use cl instead)
-  nn s <Plug>(easymotion-s)
-  vn s <Plug>(easymotion-s)
+  nnoremap s <Plug>(easymotion-s)
+  vnoremap s <Plug>(easymotion-s)
 
   "Add easymotion search
   map <Leader>m <Plug>(easymotion-sn)
@@ -1029,17 +1048,19 @@ augroup END
 
 """""""EDITORCONFIG""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup EDITORCONFIG
+  au!
   let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
 augroup END
 
 """""""FZF"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup FZF
+  au!
   "Set filename search
-  nn <Leader>o :Files<CR>
+  nnoremap <Leader>o :Files<CR>
 
   "Set filebody search
-  nn <Leader>/ :F<CR>
+  nnoremap <Leader>/ :F<CR>
   let g:rg_command = '
         \ rg --column --line-number --no-heading --fixed-strings --ignore-case
         \ --no-ignore --hidden --follow --color "always"
@@ -1065,6 +1086,7 @@ augroup END
 
 """""""GUTENTAGS"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup GUTENTAGS
+  au!
   "Specify cache dir in vim folder
   let g:gutentags_cache_dir = '~/.vim/gutentags'
 
@@ -1081,8 +1103,9 @@ augroup END
 
 """""""HOPPING.VIM"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup HOPPING.VIM
+  au!
   " Map to Leader+/
-  nm <Space>? <Plug>(hopping-start)
+  nmap <Space>? <Plug>(hopping-start)
 
   " Keymapping
   let g:hopping#keymapping = {
@@ -1096,8 +1119,9 @@ augroup END
 
 """""""INTERSTINGWORDS"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup INTERSTINGWORDS
-  nn <silent> <Leader>i :call InterestingWords('n')<CR>
-  nn <silent> <Leader>I :call UncolorAllWords()<CR>
+  au!
+  nnoremap <silent> <Leader>i :call InterestingWords('n')<CR>
+  nnoremap <silent> <Leader>I :call UncolorAllWords()<CR>
 
   let g:interestingWordsGUIColors = [
         \'134', '101', '211', '137', '214', '222']
@@ -1106,6 +1130,7 @@ augroup END
 
 """""""LOGVIEWER""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup LOGVIEWER
+  au!
   let g:LogViewer_Filetypes = 'log4j,syslog,log'
 augroup END
 
@@ -1113,8 +1138,9 @@ augroup END
 
 """""""NERDTREE""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup NERDTREE
+  au!
   "Give a shortcut key to NERD Tree map
-  nm <Leader>O :NERDTreeToggle<CR>
+  nmap <Leader>O :NERDTreeToggle<CR>
 
   "NERDTree open if no files / close if left / open on F4
   "au StdinReadPre * let s:std_in=1
@@ -1137,14 +1163,16 @@ augroup END
 
 """""""NRRWRGN"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup NRRWRGN
-  nm <Leader>nw :NR<CR>
-  vm <Leader>nw :NR<CR>
+  au!
+  nmap <Leader>nw :NR<CR>
+  vmap <Leader>nw :NR<CR>
   let g:nrrw_topbot_leftright = 'botright'
 
 augroup END
 
 """""""PHPComplete"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup PHPComplete
+  au!
   let g:phpcomplete_parse_docblock_comments = 1
 
   "let g:phpcomplete_mappings = {
@@ -1155,27 +1183,30 @@ augroup PHPComplete
   "\}
 
   "Jump definition binding split
-  nm <Leader>jd <C-W><C-\>
+  nmap <Leader>jd <C-W><C-\>
 
 augroup END
 
 """""""SCRATCH"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup SCRATCH
+  au!
   let g:scratch_filetype = 'markdown'
 
 augroup END
 
 """""""SIGNATURE"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup SIGNATURE
-  nm <Leader>sm :SignatureToggle<CR>
-  nm <Leader>sr :SignatureRefresh<CR>
+  au!
+  nmap <Leader>sm :SignatureToggle<CR>
+  nmap <Leader>sr :SignatureRefresh<CR>
 augroup END
 
 
 
 """""""TAGBAR""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup TAGBAR
-  nm <Leader>tt :TagbarToggle<CR>
+  au!
+  nmap <Leader>tt :TagbarToggle<CR>
 
   "TagBar-PHPCTags Options
   let g:tagbar_phpctags_memory_limit = '2G'
@@ -1185,34 +1216,36 @@ augroup END
 
 """""""UNDOTREE""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup UNDOTREE
+  au!
   "Leader+u Sets Undotree
-  nn <Leader>U :UndotreeToggle<CR>
+  nnoremap <Leader>U :UndotreeToggle<CR>
 augroup END
 
 """""""VIM-AI""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup VIM-AI
+  au!
   let g:vim_ai_roles_config_file = $HOME.'/.config/.vim-ai-roles.ini'
 
   " run explain on the current visual selection
   xn <leader>\ :AIC Explain this code<CR>
 
   " open with starting prompt
-  nn <leader><leader>\ :AIC
+  nnoremap <leader><leader>\ :AIC
   xn <leader><leader>\ :AIC
 
   " open AI chat
-  nn <leader><CR> :AIC<CR>
+  nnoremap <leader><CR> :AIC<CR>
 
   " complete text on the current line or in visual selection
   xn <leader><CR> :AI<CR>
 
   " open AI prompt for gen code
-  nn <leader><leader><CR> :AI
+  nnoremap <leader><leader><CR> :AI
   xn <leader><leader><CR> :AI
 
   " run AI edit or redo edit
   xn <leader>' :AIE
-  nn <leader><leader>' :AIR<CR>
+  nnoremap <leader><leader>' :AIR<CR>
 
   " Not implemented yet
   "nn <leader>??? :AII
@@ -1225,6 +1258,7 @@ augroup END
 
 """""""VIM-AUTOFORMAT""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup VIM-AUTOFORMAT
+  au!
   "let g:formatterpath = ['/some/path/to/a/folder']
   "let g:autoformat_verbosemode=1
 
@@ -1235,23 +1269,26 @@ augroup VIM-AUTOFORMAT
         \ '"cat ". expand("%:p") . " | shellharden --transform '''' "'
   let g:run_all_formatters_sh = 1
 
-  nn <Leader>F :Autoformat<CR>
+  nnoremap <Leader>F :Autoformat<CR>
 augroup END
 
 """""""VIM-STICKY""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup VIM-STICKY
+  au!
   let g:sticky_all = ['cursorcolumn', 'cursorline', 'list']
 
 augroup END
 
 """""""VIM-SURROUND""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup VIM-SURROUND
+  au!
   let b:surround_{char2nr('c')} = "```\r```"
 
 augroup END
 
 """""""VIM-TERRAFORM"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup VIM-TERRAFORM
+  au!
   " FMT / Align TF files automatically
   let g:terraform_align=1
   let g:terraform_fmt_on_save=1
@@ -1263,6 +1300,7 @@ augroup END
 """""""HELPER FUNCTIONS""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup HELPER
+  au!
 
 """""""""DISPLAY INFO ON COMMAND LINE""""""""""""""""""""""""""""""""""""""""""
   function! CmdLine(str)
@@ -1287,11 +1325,11 @@ augroup HELPER
 
 """""""""COPY THE CURRENT TEXT SELECTION TO THE SYSTEM CLIPBOARD"""""""""""""""
   if has('gui_running')
-    no <Leader>y "+y
+    noremap <Leader>y "+y
   else
     " copy to attached terminal using the yank(1) script:
     " https://github.com/sunaku/home/blob/master/bin/yank
-    no <silent> <Leader>y y
+    noremap <silent> <Leader>y y
           \ :silent execute
           \   '!/bin/echo -n' shellescape(escape(@0, '\'), 1) '<Bar> yank'
           \ <Bar>redraw!<Return>
@@ -1321,6 +1359,7 @@ augroup END
 
 """""""COLORS""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup COLORS
+  au!
   "Sample colors @ http://bytefluent.com/vivify/
   set background=dark
   colo valloric
@@ -1368,6 +1407,7 @@ augroup END
 
 """""""COC"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup colorscheme_coc_setup | au!
+  au!
 
   func! s:coc_color_setup() abort
     hi! CocFloating ctermbg=black ctermfg=white
