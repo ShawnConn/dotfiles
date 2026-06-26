@@ -8,3 +8,5 @@
 .slack
 .gh-pr.json
 .scannerwork
+
+**/.claude/settings.local.json
