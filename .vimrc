@@ -22,6 +22,7 @@ augroup DEBUGGING
     if !&verbose
       set verbosefile=~/.vim/verbose.log
       set verbose=15
+
     else
       set verbose=0
       set verbosefile=
@@ -56,14 +57,8 @@ augroup AUTOCOMPLETE
   au!
   "j/k to navigate
   "autocomplete menu
-  inoremap <expr> J ((pumvisible())?("\<C-n>"):("J"))
-  inoremap <expr> K ((pumvisible())?("\<C-p>"):("K"))
-
-  "Dictionary complete with Tab+d
-  inoremap <Tab>d <C-X><C-k>
-
-  "Line complete with Tab+l
-  inoremap <Tab>l <C-x><C-l>
+  inoremap <silent><expr> J coc#pum#visible() ? coc#pum#next(1) : pumvisible() ? "\<C-n>" : "J"
+  inoremap <silent><expr> K coc#pum#visible() ? coc#pum#prev(1) : pumvisible() ? "\<C-p>" : "K"
 
   "Autocomplete from dictionary as well
   set complete+=k
