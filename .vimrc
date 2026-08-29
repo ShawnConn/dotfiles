@@ -314,7 +314,7 @@ augroup COMMANDS
   " <Leader>+x = Toggl,texte task checkbox [ ] <-> [x]
   au FileType markdown,text nnoremap <buffer><silent><Leader>x :s/\[\([ x]\)\]/\=submatch(1) == ' ' ? '[x]' : '[ ]'/e<CR>:noh<CR>
   " <Leader>+h = Incre,textase Header level
-  au FileType markdown,text nnoremap <buffer><silent><Leader>h :s/^\(#*\)\( \?\)/\1# /<CR>:noh<CR>
+  au FileType markdown,text nnoremap <buffer><silent><Leader>H :s/^\(#*\)\( \?\)/\1# /<CR>:noh<CR>
   " <Leader>+r = Inser,textt Horizontal Rule below current line
   au FileType markdown,text nnoremap <buffer><silent><Leader>r o<CR>---<CR><CR><ESC>
   " <Leader>+d = Wrap ,textin HTML <details> block (ASCII 100 = d)
