@@ -20,13 +20,12 @@
 
 """""""PLUGINS""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup PLUGINS
-  if !has('nvim')
-    Plug 'joonty/vdebug'
-  endif
   Plug 'bling/vim-airline'
   Plug 'chiel92/vim-autoformat'
   Plug 'chr4/nginx.vim'
   Plug 'chrisbra/nrrwrgn'
+  Plug 'easymotion/vim-easymotion'
+  "Plug 'justinmk/vim-sneak'
   Plug 'editorconfig/editorconfig-vim'
   Plug 'elzr/vim-json'
   Plug 'ernstwi/vim-sticky'
@@ -40,14 +39,17 @@ augroup PLUGINS
   Plug 'https://git.drupal.org/project/vimrc.git', {'rtp': 'bundle/vim-plugin-for-drupal/'}
   Plug 'itchyny/vim-cursorword'
   Plug 'jelera/vim-javascript-syntax'
-  Plug 'junegunn/fzf'
+  if !has('nvim')
+    Plug 'joonty/vdebug'
+  endif
   Plug 'junegunn/fzf.vim'
+  Plug 'junegunn/fzf'
   Plug 'kkoomen/vim-doge'
   Plug 'leafgarland/typescript-vim'
   Plug 'luciditi/vim-signature'
   Plug 'ludovicchabant/vim-gutentags'
-  Plug 'madox2/vim-ai'
   Plug 'madox2/vim-ai-provider-google'
+  Plug 'madox2/vim-ai'
   Plug 'majutsushi/tagbar'
   Plug 'mbbill/undotree'
   Plug 'mtth/scratch.vim'
@@ -80,7 +82,6 @@ augroup PLUGINS
   Plug 'vim-php/tagbar-phpctags.vim'
   Plug 'vim-scripts/repmo.vim'
   Plug 'wellle/targets.vim'
-  Plug 'easymotion/vim-easymotion'
   Plug 'yggdroot/indentline'
 augroup END
 """""""PLUGINS""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
