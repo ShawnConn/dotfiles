@@ -274,6 +274,23 @@ plutil -replace AppleSymbolicHotKeys.61.enabled -bool NO ~/Library/Preferences/c
 /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
 
 ###############################################################################
+# Accessibility                                                               #
+###############################################################################
+
+# Alternate pointer actions
+defaults write com.apple.universalaccess alternateMouseButtonsEnabled -int 1
+defaults write com.apple.universalaccess alternateMouseButtonsPlaySound -int 1
+defaults write com.apple.universalaccess alternateMouseButtonsShowVisualFeedback -int 1
+
+# Head pointer
+defaults write com.apple.universalaccess headMouseEnabled -int 1
+defaults write com.apple.universalaccess headMouseMode -int 2
+defaults write com.apple.universalaccess headMousePauseResumeSwitchEnabled -int 1
+defaults write com.apple.universalaccess headMouseRecalibrateSwitchEnabled -int 1
+defaults write com.apple.universalaccess headMouseSensitivity -int 1
+defaults write com.apple.universalaccess headMouseTolerance -int 0
+
+###############################################################################
 # Energy saving                                                               #
 ###############################################################################
 
