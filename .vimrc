@@ -180,14 +180,14 @@ augroup COMMANDS
   "Pressing <Leader>sp will toggle and un-toggle spell checking
   nnoremap <Leader>sp :setlocal spell!<CR>
 
-  "Use paste mode with yo, yO, yi, yI, ya, yA
+  "Use paste mode with <Leader>yo, <Leader>yO, <Leader>yi, <Leader>yI, <Leader>ya, <Leader>yA
   nnoremap <Leader>yp :set paste!<CR>
-  nnoremap <silent>yo  :set paste<CR>o
-  nnoremap <silent>yO  :set paste<CR>O
-  nnoremap <silent>yi  :set paste<CR>i
-  nnoremap <silent>yI  :set paste<CR>I
-  nnoremap <silent>ya  :set paste<CR>a
-  nnoremap <silent>yA  :set paste<CR>A
+  nnoremap <silent> <Leader>yo :set paste<CR>o
+  nnoremap <silent> <Leader>yO :set paste<CR>O
+  nnoremap <silent> <Leader>yi :set paste<CR>i
+  nnoremap <silent> <Leader>yI :set paste<CR>I
+  nnoremap <silent> <Leader>ya :set paste<CR>a
+  nnoremap <silent> <Leader>yA :set paste<CR>A
 
   " P or <Leader>p will keep register contents
   vnoremap P "_dP
