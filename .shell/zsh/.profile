@@ -102,10 +102,17 @@ bindkey -M vicmd 'K' run-help
 #10 ms key sequence for VI mode
 KEYTIMEOUT=20
 
-# Use B in cmd mode for editing buffer in vim
-autoload edit-command-line
+# Use Alt+B to edit command line in vim regardless of mode
+autoload -Uz edit-command-line
 zle -N edit-command-line
-bindkey -M vicmd 'B' edit-command-line
+bindkey '^[b' edit-command-line
+bindkey '^[B' edit-command-line
+bindkey -M vicmd '^[b' edit-command-line
+bindkey -M vicmd '^[B' edit-command-line
+if [[ ${keymaps[(ie)vivis]} -le ${#keymaps} ]]; then
+  bindkey -M vivis '^[b' edit-command-line
+  bindkey -M vivis '^[B' edit-command-line
+fi
 
 #Set custom cursor for vi mode
 function zle-keymap-select zle-line-init {
