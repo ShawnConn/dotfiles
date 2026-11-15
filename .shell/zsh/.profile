@@ -15,12 +15,12 @@ if [[ -x /opt/homebrew/bin/brew ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-#######   ANTIGEN  #############################################################
+#######   ANTIDOTE #############################################################
 export ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
 mkdir -p "$ZSH_CACHE_DIR/completions"
 
-if [[ -f "$HOME/.shell/zsh/.profile.antigen" ]]; then
-  source "$HOME/.shell/zsh/.profile.antigen"
+if [[ -f "$HOME/.shell/zsh/.profile.antidote" ]]; then
+  source "$HOME/.shell/zsh/.profile.antidote"
 fi
 
 #######   OMZ   ################################################################
@@ -274,7 +274,7 @@ SAVEHIST=200000
 # More prominent EOL
 PROMPT_EOL_MARK=""
 
-# Set colors for antigen plugins
+# Set colors for antidote plugins
 autoload colors && colors
 
 #######   APP CONFIG   #########################################################

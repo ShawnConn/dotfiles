@@ -173,7 +173,7 @@ if [ -n "$ZSH_VERSION" ]; then
 
   }
 
-  # Set the ZSH theme then touch .zshrc to have antigen pick it up.
+  # Set the ZSH theme then touch .zshrc to have antidote pick it up.
   function zsh-theme() {
     if [ -z "$1" ]; then
       rm ~/.zshrc.theme 2> /dev/null || true

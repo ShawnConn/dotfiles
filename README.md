@@ -19,7 +19,7 @@ Used as default for [env-setup](https://github.com/Luciditi/env-setup).
 - [`.shell/`](.shell): Core shell configuration directory:
   - [`common/`](.shell/common): Shared, POSIX-compatible aliases and functions.
   - [`bash/`](.shell/bash): Bash-specific configuration, completions, and aliases.
-  - [`zsh/`](.shell/zsh): Zsh-specific configuration, completions, aliases, and antigen scripts.
+  - [`zsh/`](.shell/zsh): Zsh-specific configuration, completions, aliases, and antidote scripts.
   - [`bin/`](.shell/bin): Shared CLI executables added to the system `PATH`.
 - [`.vim/`](.vim): Vim configuration directory (backups, swaps, undos, templates).
 - [`.vimrc`](.vimrc): Main Vim settings, mappings, and plugin configurations.

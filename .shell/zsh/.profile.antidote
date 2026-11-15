@@ -1,0 +1,35 @@
+#!/usr/bin/env zsh
+
+#######   ANTIDOTE   ###########################################################
+if [[ -f "${HOMEBREW_PREFIX:-/opt/homebrew}/opt/antidote/share/antidote/antidote.zsh" ]]; then
+  source "${HOMEBREW_PREFIX:-/opt/homebrew}/opt/antidote/share/antidote/antidote.zsh"
+elif [[ -f "/usr/local/opt/antidote/share/antidote/antidote.zsh" ]]; then
+  source "/usr/local/opt/antidote/share/antidote/antidote.zsh"
+elif [[ -f "/home/linuxbrew/.linuxbrew/opt/antidote/share/antidote/antidote.zsh" ]]; then
+  source "/home/linuxbrew/.linuxbrew/opt/antidote/share/antidote/antidote.zsh"
+elif [[ -f "/usr/share/zsh-antidote/antidote.zsh" ]]; then
+  source "/usr/share/zsh-antidote/antidote.zsh"
+elif [[ -x "$(command -v brew)" && -f "$(brew --prefix)/opt/antidote/share/antidote/antidote.zsh" ]]; then
+  source "$(brew --prefix)/opt/antidote/share/antidote/antidote.zsh"
+fi
+
+if (( $+functions[antidote] )); then
+  zstyle ':antidote:bundle' use-friendly-names 'yes'
+
+  zsh_plugins="$HOME/.shell/zsh/.zsh_plugins.zsh"
+  if [[ ! -f "$zsh_plugins" || "$HOME/.shell/zsh/.zsh_plugins.txt" -nt "$zsh_plugins" ]]; then
+    antidote bundle <"$HOME/.shell/zsh/.zsh_plugins.txt" >|"$zsh_plugins"
+  fi
+
+  source "$zsh_plugins"
+
+  # Support temporary theme override via ~/.zshrc.theme (used by zsh-theme / liveshell)
+  if [[ -f "$HOME/.zshrc.theme" ]]; then
+    THEME=$(<"$HOME/.zshrc.theme")
+    OMZ_DIR="${ZSH:-$(antidote path ohmyzsh/ohmyzsh 2>/dev/null)}"
+    if [[ -n "$OMZ_DIR" && -f "$OMZ_DIR/themes/${THEME}.zsh-theme" ]]; then
+      source "$OMZ_DIR/themes/${THEME}.zsh-theme"
+    fi
+  fi
+fi
+#######   ANTIDOTE   ###########################################################
