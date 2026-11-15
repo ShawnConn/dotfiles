@@ -56,7 +56,7 @@ romkatv/zsh-bench kind:path
 supercrabtree/k
 unixorn/docker-helpers.zshplugin branch:main
 unixorn/git-extra-commands branch:main
-zsh-users/zsh-autosuggestions
+zsh-users/zsh-autosuggestions branch:v0.5.0
 zsh-vi-more/vi-motions
 b4b4r07/zsh-vimode-visual
 
