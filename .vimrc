@@ -64,7 +64,7 @@ augroup AUTOCOMPLETE
   set complete+=k
 
   "Personal Dictionary complete with C-d
-  silent! set dict +=~/.vim/dictionaries/personal.dict
+  silent! set dict+=~/.vim/dictionaries/personal.dict
 augroup END
 
 """""""BAD COMMANDS""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -677,17 +677,17 @@ augroup SETTINGS
   au!
 
   "Set Backup Dir
-  set backupdir =~/.vim/backup//
+  set backupdir=~/.vim/backup//
   " Some servers have issues with backup files (e.g. coc.nvim), so keep backups off
   set nobackup
   set nowritebackup
 
   "Set Swap Dir
-  set directory =~/.vim/swap//
+  set directory=~/.vim/swap//
   set noswapfile
 
   "Set Undo Dir
-  silent! set undodir =~/.vim/undo//
+  silent! set undodir=~/.vim/undo//
 
   "Set Autoread
   set ar
