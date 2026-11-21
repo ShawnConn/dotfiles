@@ -1,5 +1,10 @@
 """""""LUCIDITI .VIMRC"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+"Set leader to Space (must be set before sourcing plugins)
+let mapleader = "\<Space>"
+let g:mapleader = "\<Space>"
+let g:maplocalleader = "\\"
+
 """""""PLUGINS"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 source $HOME/.plugins.vimrc
 
@@ -32,7 +37,7 @@ augroup DEBUGGING
 augroup END
 
 """""""USEFUL COMMANDS"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-augroup USEFUL COMMANDS
+augroup USEFUL_COMMANDS
   au!
   "  __           :  _____________________________________.
   "  ``           :  Return to previous cursor before jump.
@@ -68,17 +73,12 @@ augroup AUTOCOMPLETE
 augroup END
 
 """""""BAD COMMANDS""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-augroup BAD COMMANDS
+augroup BAD_COMMANDS
 augroup END
 
 """""""COMMANDS"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup COMMANDS
   au!
-  "Set leader to Space
-  let mapleader = "\<Space>"
-  let g:mapleader = "\<Space>"
-  let g:maplocalleader = "\\"
-
   "Double tap local leader for prev buffer
   noremap <Localleader><Localleader> <c-^>
 
@@ -263,20 +263,15 @@ augroup COMMANDS
 
   """"" PHP/Drupal """""
   "Quick object ref & array key/val assignment
-  au FileType drush,php,module,inc,
-        \install,test,profile,theme ino -- ->
-  au FileType drush,php,module,inc,
-        \install,test,profile,theme ino ;; ::
-  au FileType drush,php,module,inc,
-        \install,test,profile,theme ino -= =>
+  au FileType php ino -- ->
+  au FileType php ino ;; ::
+  au FileType php ino -= =>
 
   "Quick var ref
-  au FileType drush,php,module,inc,
-        \install,js,test,profile,theme ino vv $
+  au FileType php,javascript ino vv $
 
   "Quick PHP functions
-  au FileType drush,php,module,inc,
-        \install,test,profile,theme ino vd var_dump
+  au FileType php ino vd var_dump
 
   "Quick end statement
   nnoremap <Leader>; A;<ESC>
@@ -286,38 +281,38 @@ augroup COMMANDS
   " <Leader>+b = Wrap bold (ASCII 98 = b)
   au FileType markdown,text let b:surround_98 = "**\r**"
   au FileType markdown,text vmap <buffer><silent><Leader>b Sb
-  " <Leader>+c = Wrap ,textcode
+  " <Leader>+c = Wrap code
   au FileType markdown,text vmap <buffer><silent><Leader>c S`
-  " <Leader>+C = Wrap ,textcode block
+  " <Leader>+C = Wrap code block
   au FileType markdown,text let b:surround_99 = "```\n\r\n```"
   au FileType markdown,text vmap <buffer><silent><Leader>C Sc
-  " <Leader>+e = Wrap ,textexample code block
+  " <Leader>+e = Wrap example code block
   au FileType markdown,text vmap <buffer><silent><Leader>e Sci<BS><ESC>
-  " <Leader>+p = Wrap ,textpicture/image
+  " <Leader>+p = Wrap picture/image
   au FileType markdown,text vmap
-      \ <buffer><silen,textt><Leader>p S]%a(<C-R>+ "TITLE")<ESC><TAB>h<TAB>i!<ESC>
-  " <Leader>+i = Wrap ,textitalic
+      \ <buffer><silent><Leader>p S]%a(<C-R>+ "TITLE")<ESC><TAB>h<TAB>i!<ESC>
+  " <Leader>+i = Wrap italic
   au FileType markdown,text vmap <buffer><silent><Leader>i S_
-  " <Leader>+l = Wrap ,textclipboard link
+  " <Leader>+l = Wrap clipboard link
   au FileType markdown,text vmap <buffer><silent><Leader>l S]%a(<C-R>+)<ESC>
-  " <Leader>+s = Wrap ,textstrikethrough (ASCII 115 = s)
+  " <Leader>+s = Wrap strikethrough (ASCII 115 = s)
   au FileType markdown,text let b:surround_115 = "~~\r~~"
   au FileType markdown,text vmap <buffer><silent><Leader>s Ss
-  " <Leader>+q = Block,textquote (Prepends '> ' to selected lines)
+  " <Leader>+q = Blockquote (Prepends '> ' to selected lines)
   au FileType markdown,text vnoremap <buffer><silent><Leader>q :s/^/> /<CR>:noh<CR>
-  " <Leader>+u = Unord,textered List (Prepends '- ' to selected lines)
+  " <Leader>+u = Unordered List (Prepends '- ' to selected lines)
   au FileType markdown,text vnoremap <buffer><silent><Leader>u :s/^/- /<CR>:noh<CR>
-  " <Leader>+o = Order,texted List (Prepends '1. ' to selected lines. Markdown auto-numbers on render!)
+  " <Leader>+o = Ordered List (Prepends '1. ' to selected lines. Markdown auto-numbers on render!)
   au FileType markdown,text vnoremap <buffer><silent><Leader>o :s/^/1. /<CR>:noh<CR>
-  " <Leader>+t = Task ,textList (Prepends '- [ ] ' to selected lines)
+  " <Leader>+t = Task List (Prepends '- [ ] ' to selected lines)
   au FileType markdown,text vnoremap <buffer><silent><Leader>t :s/^/- [ ] /<CR>:noh<CR>
-  " <Leader>+x = Toggl,texte task checkbox [ ] <-> [x]
+  " <Leader>+x = Toggle task checkbox [ ] <-> [x]
   au FileType markdown,text nnoremap <buffer><silent><Leader>x :s/\[\([ x]\)\]/\=submatch(1) == ' ' ? '[x]' : '[ ]'/e<CR>:noh<CR>
-  " <Leader>+h = Incre,textase Header level
+  " <Leader>+h = Increase Header level
   au FileType markdown,text nnoremap <buffer><silent><Leader>H :s/^\(#*\)\( \?\)/\1# /<CR>:noh<CR>
-  " <Leader>+r = Inser,textt Horizontal Rule below current line
+  " <Leader>+r = Insert Horizontal Rule below current line
   au FileType markdown,text nnoremap <buffer><silent><Leader>r o<CR>---<CR><CR><ESC>
-  " <Leader>+d = Wrap ,textin HTML <details> block (ASCII 100 = d)
+  " <Leader>+d = Wrap in HTML <details> block (ASCII 100 = d)
   au FileType markdown,text let b:surround_100 = "<details>\n<summary>Details</summary>\n\n\r\n</details>"
   au FileType markdown,text vmap <buffer><silent><Leader>d Sd
   """"" Markdown """""
@@ -330,7 +325,12 @@ augroup FORMATTING
   set ruler
 
   "Automatically remove trailing whitespace for certain files
-  au BufWritePre *.c,*.cpp,*.css,*.drush,*.inc,*.install,*.html,*.java,*.js,*.module,*.php,*.pl,*.rb,*.sh,*.theme,*.test :%s/\s\+$//e
+  function! s:StripTrailingWhitespace() abort
+    let l:view = winsaveview()
+    keepjumps keeppatterns %s/\s\+$//e
+    call winrestview(l:view)
+  endfunction
+  au BufWritePre *.c,*.cpp,*.css,*.drush,*.inc,*.install,*.html,*.java,*.js,*.module,*.php,*.pl,*.rb,*.sh,*.theme,*.test call s:StripTrailingWhitespace()
 
   "Set status line with file info
   set statusline=\ %{HasPaste()}%F%m%r%h%w
@@ -368,7 +368,7 @@ augroup FORMATTING
   set autoindent
 
   "Toggle relative line numbering
-  nmap <Leader><Leader>n :set invrelativenumber!<CR>
+  nmap <Leader><Leader>n :set relativenumber!<CR>
   "set invrelativenumber
 
   "Tab = 2 spaces
@@ -404,12 +404,12 @@ augroup FORMATTING
 
   ":FormatNewline = the Windows ^M - when the encodings gets messed up
   if !exists(":FormatNewline")
-    command FormatNewline execute "normal mmHmt:%s/<C-V><CR>//ge<CR>'tzt'm"
+    command! FormatNewline keepjumps keeppatterns %s/\r//ge
   endif
 
   ":FormatRetab = Retab document
   if !exists(":FormatTab")
-    command FormatTab execute "retab <CR>"
+    command! FormatTab retab
   endif
 augroup END
 
@@ -454,7 +454,7 @@ augroup HIGHLIGHTING
   nmap <Leader>ch :set cursorcolumn!<CR>:set cursorline!<CR>
 
   "Highlight redundant whitespaces and tabs.
-  highlight RedundantSpaces ctermbg=red guibg=red
+  au ColorScheme * highlight RedundantSpaces ctermbg=red guibg=red
   au WinEnter,VimEnter * match RedundantSpaces /\s\+$\| \+\ze\t\|\t/
 
   "Incremental search/nopaste/comment block
@@ -466,13 +466,9 @@ augroup HIGHLIGHTING
   "HTML/PHP/JS/CSS autocomplete
   au FileType css set omnifunc=csscomplete#CompleteCSS
   au FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  au FileType js set omnifunc=javascriptcomplete#CompleteJS
   au FileType javascript
         \ setlocal omnifunc=javascriptcomplete#CompleteJS
   au FileType php setlocal omnifunc=phpcomplete#CompletePHP
-  au FileType module setlocal omnifunc=phpcomplete#CompletePHP
-  au FileType drush setlocal omnifunc=phpcomplete#CompletePHP
-  au FileType theme setlocal omnifunc=phpcomplete#CompletePHP
   au FileType python setlocal omnifunc=pythoncomplete#Complete
   au FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
@@ -529,8 +525,8 @@ augroup HIGHLIGHTING
   "This fold is the one true king
   nnoremap <Leader>zc zMzvzz
 
-  "Turn off folding
-  nnoremap <Leader>zz :set nofoldenable!<CR>
+  "Toggle folding
+  nnoremap <Leader>zz :set foldenable!<CR>
 
   "Set PHP function folding
   nnoremap <Leader>zp :EnablePHPFolds<CR>zM
@@ -553,7 +549,7 @@ augroup BINARY
 augroup END
 
 """""""""MAC VIM"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-augroup MAC VIM
+augroup MAC_VIM
   au!
   "Set Nerd Fonts
   if has("gui_running")
@@ -612,7 +608,7 @@ augroup POSITION
 augroup END
 
 """""""""QUICK EDITS"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-augroup QUICK EDITS
+augroup QUICK_EDITS
   au!
   nnoremap <Leader>ev :vsplit $MYVIMRC<CR>
   nnoremap <Leader>eb :vsplit ~/.bash_profile<CR>
@@ -1165,23 +1161,6 @@ augroup NRRWRGN
 
 augroup END
 
-"""""""PHPComplete"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-augroup PHPComplete
-  au!
-  let g:phpcomplete_parse_docblock_comments = 1
-
-  "let g:phpcomplete_mappings = {
-        "\ 'jump_to_def': '<C-]>',
-        "\ 'jump_to_def_split': '<C-W><C-]>',
-        "\ 'jump_to_def_vsplit': '<C-W><C-\>',
-        "\ 'jump_to_def_tabnew': '<C-W><C-[>',
-  "\}
-
-  "Jump definition binding split
-  nmap <Leader>jd <C-W><C-\>
-
-augroup END
-
 """""""SCRATCH"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup SCRATCH
   au!
@@ -1277,7 +1256,7 @@ augroup END
 """""""VIM-SURROUND""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup VIM-SURROUND
   au!
-  let b:surround_{char2nr('c')} = "```\r```"
+  let g:surround_{char2nr('c')} = "```\r```"
 
 augroup END
 
@@ -1358,6 +1337,7 @@ augroup COLORS
   "Sample colors @ http://bytefluent.com/vivify/
   set background=dark
   colo valloric
+  highlight RedundantSpaces ctermbg=red guibg=red
 
   "Line Colors
   highlight LineNr ctermbg=236
@@ -1408,7 +1388,7 @@ augroup colorscheme_coc_setup | au!
     hi! CocFloating ctermbg=black ctermfg=white
     hi! CocFloatActive ctermbg=black ctermfg=white
     hi! CocSearch ctermbg=black ctermfg=white
-    hi! CocErrorFloat ctermfg=black ctermfg=white
+    hi! CocErrorFloat ctermbg=black ctermfg=white
     hi! CocMenuSel ctermbg=DarkMagenta
   endfunc
 
