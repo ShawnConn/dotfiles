@@ -297,6 +297,8 @@ augroup COMMANDS
   au FileType markdown,text nnoremap <buffer><silent><Leader>x :s/\[\([ x]\)\]/\=submatch(1) == ' ' ? '[x]' : '[ ]'/e<CR>:noh<CR>
   " <LocalLeader>h = Increase Header level
   au FileType markdown,text nnoremap <buffer><silent><LocalLeader>h :s/^\(#*\)\( \?\)/\1# /<CR>:noh<CR>
+  " <LocalLeader>H = Decrease Header level
+  au FileType markdown,text nnoremap <buffer><silent><LocalLeader>H :s/^#\(\ze#\<Bar> \?\)//e<CR>:noh<CR>
   " <Leader>+r = Insert Horizontal Rule below current line
   au FileType markdown,text nnoremap <buffer><silent><Leader>r o<CR>---<CR><CR><ESC>
   " <Leader>+d = Wrap in HTML <details> block (ASCII 100 = d)
