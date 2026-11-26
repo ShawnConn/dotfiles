@@ -41,7 +41,7 @@ augroup USEFUL_COMMANDS
   au!
   "  __           :  _____________________________________.
   "  ``           :  Return to previous cursor before jump.
-  "  gi           :  Last Place in Insert Mode.
+  "  gi           :  (Mapped to CoC implementation; use '^ for last insert.)
 
 augroup END
 
@@ -60,11 +60,6 @@ augroup END
 """""""AUTOCOMPLETE""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup AUTOCOMPLETE
   au!
-  "j/k to navigate
-  "autocomplete menu
-  inoremap <silent><expr> J coc#pum#visible() ? coc#pum#next(1) : pumvisible() ? "\<C-n>" : "J"
-  inoremap <silent><expr> K coc#pum#visible() ? coc#pum#prev(1) : pumvisible() ? "\<C-p>" : "K"
-
   "Autocomplete from dictionary as well
   set complete+=k
 
@@ -193,11 +188,6 @@ augroup COMMANDS
   vnoremap P "_dP
   vnoremap <Leader>p "_dP
 
-  "Tab will jump to matched char
-  nnoremap <Tab> %
-  vnoremap <Tab> %
-  map <Tab> %
-
   "Move <C-h>/<C-l> start/end for insert/commands
   inoremap <C-h> <ESC>I
   inoremap <C-l> <ESC>A
@@ -220,9 +210,6 @@ augroup COMMANDS
   nnoremap <expr> } foldclosed(search('^$', 'Wn')) == -1 ? "}" : "}j}"
   nnoremap <expr> { foldclosed(search('^$', 'Wnb')) == -1 ? "{" : "{k{"
   " IGNORE: FIX FOR .vimrc SynHighlight: }
-
-  "ENTER to get a command out
-  map <Leader><CR> :
 
   " Source For Testing VimScript
   vnoremap <Leader>S y:execute @@<CR>:echo 'Sourced selection.'<CR>
@@ -308,8 +295,8 @@ augroup COMMANDS
   au FileType markdown,text vnoremap <buffer><silent><Leader>t :s/^/- [ ] /<CR>:noh<CR>
   " <Leader>+x = Toggle task checkbox [ ] <-> [x]
   au FileType markdown,text nnoremap <buffer><silent><Leader>x :s/\[\([ x]\)\]/\=submatch(1) == ' ' ? '[x]' : '[ ]'/e<CR>:noh<CR>
-  " <Leader>+h = Increase Header level
-  au FileType markdown,text nnoremap <buffer><silent><Leader>H :s/^\(#*\)\( \?\)/\1# /<CR>:noh<CR>
+  " <LocalLeader>h = Increase Header level
+  au FileType markdown,text nnoremap <buffer><silent><LocalLeader>h :s/^\(#*\)\( \?\)/\1# /<CR>:noh<CR>
   " <Leader>+r = Insert Horizontal Rule below current line
   au FileType markdown,text nnoremap <buffer><silent><Leader>r o<CR>---<CR><CR><ESC>
   " <Leader>+d = Wrap in HTML <details> block (ASCII 100 = d)
@@ -644,16 +631,12 @@ augroup SEARCH
   nnoremap / /\v\c
   vnoremap / /\v\c
 
-  " Visual mode pressing * or # searches for the current selection
-  vnoremap <silent> * y:/<C-R>"<CR>
-  vnoremap <silent> # y:?<C-R>"<CR>
-
   "Leader+ESC will toggle off search highlighting
   nnoremap <Leader><ESC> :nohlsearch<CR>
 
   "Search from highlight mode
-  vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR><C-o>
-  vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR><C-o>
+  vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR>
+  vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR>
 
   "Search directory for instances of the current word
   noremap <Leader>#
@@ -933,21 +916,21 @@ augroup COC
 
   " Mappings for CoCList
   " Show all diagnostics
-  nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+  nnoremap <silent><nowait> <LocalLeader>a  :<C-u>CocList diagnostics<cr>
   " Manage extensions
-  nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+  nnoremap <silent><nowait> <LocalLeader>e  :<C-u>CocList extensions<cr>
   " Show commands
-  nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+  nnoremap <silent><nowait> <LocalLeader>c  :<C-u>CocList commands<cr>
   " Find symbol of current document
-  nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+  nnoremap <silent><nowait> <LocalLeader>o  :<C-u>CocList outline<cr>
   " Search workspace symbols
-  nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+  nnoremap <silent><nowait> <LocalLeader>s  :<C-u>CocList -I symbols<cr>
   " Do default action for next item
-  nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+  nnoremap <silent><nowait> <LocalLeader>j  :<C-u>CocNext<CR>
   " Do default action for previous item
-  nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+  nnoremap <silent><nowait> <LocalLeader>k  :<C-u>CocPrev<CR>
   " Resume latest coc list
-  nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+  nnoremap <silent><nowait> <LocalLeader>p  :<C-u>CocListResume<CR>
 
   " Get Extensions
   " https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
@@ -1111,6 +1094,7 @@ augroup END
 """""""INTERSTINGWORDS"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup INTERSTINGWORDS
   au!
+  let g:interestingWordsDefaultMappings = 0
   nnoremap <silent> <Leader>i :call InterestingWords('n')<CR>
   nnoremap <silent> <Leader>I :call UncolorAllWords()<CR>
 
@@ -1299,11 +1283,11 @@ augroup HELPER
 
 """""""""COPY THE CURRENT TEXT SELECTION TO THE SYSTEM CLIPBOARD"""""""""""""""
   if has('gui_running')
-    noremap <Leader>y "+y
+    vnoremap <Leader>y "+y
   else
     " copy to attached terminal using the yank(1) script:
     " https://github.com/sunaku/home/blob/master/bin/yank
-    noremap <silent> <Leader>y y
+    vnoremap <silent> <Leader>y y
           \ :silent execute
           \   '!/bin/echo -n' shellescape(escape(@0, '\'), 1) '<Bar> yank'
           \ <Bar>redraw!<Return>
